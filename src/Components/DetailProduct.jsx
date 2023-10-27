@@ -23,7 +23,6 @@ export default function DetailProduct() {
 
 
   const [detail, setDetail] = useState();
-  const [product, setProduct] = useState();
   const [showImg, setShowImg] = useState("");
   const [buy, setBuy] = useState(1);
   const [loading, setLoading] = useState(true);
@@ -211,21 +210,25 @@ export default function DetailProduct() {
                     <button
                       className=' cursor-pointer focus:ring-1 focus:ring-red-500 focus:outline-none border-red-700 border-2 text-red-700 font-medium rounded-lg text-lg px-5 py-2.5 mr-2 mb-2 w-6/12 flex items-center justify-center'
                       onClick={() => {
-                        if (buy <= leftQuantity) {
+                        if (user) {
+                          if (buy <= leftQuantity) {
 
-                          CartApi.addBook({
-                            amount: buy,
-                            ProductId: detail.Product.id,
-                            UserId: user.id,
-                            total: buy * detail.Product.price
-                          }).then(() => {
-                            showToastMessage("Thêm thành công");
-                            dispatch(addCart({
-                              product: product,
-                              cart: { amount: buy, total: buy * detail.Product.price }
-                            }));
-                            detail.Product.updateProduct(detail.Product.id, { sold: detail.Product.sold + buy }).then(() => { });
-                          })
+                            CartApi.addBook({
+                              amount: buy,
+                              ProductId: detail.Product.id,
+                              UserId: user.id,
+                              total: buy * detail.Product.price
+                            }).then(() => {
+                              showToastMessage("Thêm thành công");
+                              dispatch(addCart({
+                                product: detail.Product,
+                                cart: { amount: buy, total: buy * detail.Product.price }
+                              }));
+                              Product.updateProduct(detail.id, { sold: detail.Product.sold + buy }).then(() => { });
+                            })
+                          }
+                        } else  {
+                          alert('Bạn cần đăng nhập để sử dụng');
                         }
                       }}
                       disabled={detail.Product.sold === detail.Product.quantity}

@@ -9,10 +9,6 @@ export default function Cart() {
   const user = useSelector((state2) => state2.authentication.user);
   const navigate = useNavigate();
 
-  useEffect(() => {
-
-  }, [cart])
-
   if (!cart || !user) return null;
 
   return (
