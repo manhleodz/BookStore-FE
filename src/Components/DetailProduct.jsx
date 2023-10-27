@@ -227,7 +227,7 @@ export default function DetailProduct() {
                               Product.updateProduct(detail.id, { sold: detail.Product.sold + buy }).then(() => { });
                             })
                           }
-                        } else  {
+                        } else {
                           alert('Bạn cần đăng nhập để sử dụng');
                         }
                       }}
@@ -248,19 +248,23 @@ export default function DetailProduct() {
                     ) : (
                       <button
                         onClick={() => {
-                          if (buy <= leftQuantity) {
-                            window.location.assign(`${import.meta.env.VITE_HOMEURL}cart/${user.id}`);
-                            dispatch(addCart({
-                              product: detail.Product,
-                              cart: { amount: buy, total: buy * detail.Product.price }
-                            }));
+                          if (user) {
+                            if (buy <= leftQuantity) {
+                              window.location.assign(`${import.meta.env.VITE_HOMEURL}cart/${user.id}`);
+                              dispatch(addCart({
+                                product: detail.Product,
+                                cart: { amount: buy, total: buy * detail.Product.price }
+                              }));
 
-                            CartApi.addBook({
-                              amount: buy,
-                              ProductId: detail.Product.id,
-                              UserId: user.id,
-                              total: buy * detail.Product.price
-                            })
+                              CartApi.addBook({
+                                amount: buy,
+                                ProductId: detail.Product.id,
+                                UserId: user.id,
+                                total: buy * detail.Product.price
+                              })
+                            }
+                          } else {
+                            alert('Bạn cần đăng nhập để sử dụng')
                           }
                         }}
                         className={` cursor-pointer focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-red-500 font-medium rounded-lg text-lg px-5 py-2.5 mr-2 mb-2 w-6/12 focus:ring-1 `}>
