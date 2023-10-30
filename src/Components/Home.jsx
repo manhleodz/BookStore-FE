@@ -11,20 +11,9 @@ export default function Home() {
   const [loading, setLoading] = useState(true);
   const [flashSale, setFlashSale] = useState();
 
-  useEffect(() => {
-
-    Product.getList().then((response) => setFlashSale(response.data));
-
-    document.title = "Hung Store";
-
-    const timer = setTimeout(() => {
-      setLoading(false);
-    }, 1000);
-    return () => clearTimeout(timer);
-  }, []);
-
-  if (!flashSale) return null;
-
+  const timer = setTimeout(() => {
+    setLoading(false);
+  }, 1000);
 
   function shuffleArray(array) {
     let result = [...array];
@@ -34,6 +23,24 @@ export default function Home() {
     }
     return result;
   }
+
+  useEffect(() => {
+
+    Product.getList().then((response) => {
+      setFlashSale(response.data)
+      clearTimeout(timer)
+    });
+
+    document.title = "Hung Store";
+
+
+    // return () => clearTimeout(timer);
+  }, []);
+
+  if (!flashSale) return null;
+
+
+
 
   if (loading) {
     return <div className=' fixed top-1/2 left-1/2'><Loading /></div>

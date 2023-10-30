@@ -13,7 +13,7 @@ export default function ListBook({ flashSale }) {
 
   return (
     <div
-      className='w-screen flex justify-center items-center '
+      className='w-screen flex justify-center items-center'
       onClick={(e) => {
         if (e.target.id !== "dropdownDefaultButton") {
           setClick(false);
@@ -22,18 +22,19 @@ export default function ListBook({ flashSale }) {
     >
       <div className='w-9/12 relative justify-center items-center shadow-2xl mt-10 bg-white'>
         <div className=' w-full flex justify-start space-x-3 max-xl:space-x-0'>
-          <div className=' w-2/12 max-xl:fixed'>
+          <div className='w-2/12'>
             <button
               onClick={() => {
                 setOpenFilter(!openFilter);
+                console.log(openFilter)
               }}
-              className=' absolute z-50 p-2 border-2 border-gray-400 bg-gray-200 rounded-lg hidden max-xl:block'>
+              className=' absolute z-50 p-2 border-2 border-gray-400 bg-gray-200 rounded-lg hidden max-2xl:block'>
               <svg xmlns="http://www.w3.org/2000/svg" height="1.3em" viewBox="0 0 448 512" className=' fill-gray-400'>
                 <path d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z" />
               </svg>
             </button>
             <div
-              className={` w-full max-xl:fixed ${openFilter ? '' : ' max-xl:hidden'}`}
+              className={` w-full max-xl:absolute bg-white z-10 duration-1000 -translate-w-full transition ${!openFilter && ' -scale-x-0'}`}
             >
               <FilterBar flashSale={flashSale} filteredData={filteredData} setFilteredData={setFilteredData} />
             </div>
@@ -56,7 +57,8 @@ export default function ListBook({ flashSale }) {
                   <li>
                     <div onClick={() => {
                       setFilteredData(flashSale);
-                    }}      
+                      setSort('Tiêu biểu');
+                    }}
                       className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white cursor-pointer"
                     >Tiêu biểu
                     </div>

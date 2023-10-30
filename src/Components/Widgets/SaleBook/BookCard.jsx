@@ -11,17 +11,18 @@ export default function BookCard({ book }) {
 
     return (
         <div
-            className=' border border-gray-200 m-2 px-3 w-full h-auto hover:shadow-2xl cursor-pointer flex flex-col justify-center items-center'
+            className=' bg-white border border-gray-200 m-2 px-3 w-full h-auto hover:shadow-2xl cursor-pointer flex flex-col justify-center items-center'
             style={{maxWidth: "200px" }} 
             onClick={() => {
                 navigate(`/detail/${book.name}/${book.id}`);
             }}
         >
-            <div className=' w-full h-auto flex items-center justify-center'>
+            <div className='blurred-img w-full h-auto flex items-center justify-center'>
                 <img
                     alt="..." src={book.image} className='object-contain'
                     style={{ height: "220px", maxWidth: "150px" }} 
                     title={book.name}
+                    loading="lazy"
                 />
             </div>
             <div className='w-44' >

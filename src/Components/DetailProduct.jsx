@@ -1,16 +1,17 @@
 import React, { useEffect, useState } from 'react'
 import ReactStars from "react-rating-stars-component";
 import { Detail } from '../Network/Detail';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { Product } from '../Network/Product';
 import Loading from './Widgets/Loading/Loading';
 import { useDispatch, useSelector } from "react-redux";
-import { addCart } from "../Redux/AuthenticationSlice";
+import { addCart, setCart } from "../Redux/AuthenticationSlice";
 import { CartApi } from '../Network/Cart';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import ProductReview from './Widgets/Comments/ProductReview';
 import { useTranslation } from 'react-i18next';
+import Rating from '@mui/material/Rating';
 
 
 
@@ -18,6 +19,7 @@ export default function DetailProduct() {
 
   const { id } = useParams();
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const user = useSelector(state => state.authentication.user);
   const { t } = useTranslation();
 
@@ -109,7 +111,7 @@ export default function DetailProduct() {
                       <span
                         className='font-medium text-blue-600 cursor-pointer hover:underline'
                         onClick={() => {
-                          window.location.assign(`https://vi.wikipedia.org/wiki/${detail.author}`)
+                          window.open(`https://vi.wikipedia.org/wiki/${detail.author}`, '_blank', 'noopener,noreferrer');
                         }}
                       >
                         {detail.author !== null ? `${detail.author}` : `${t('updating')}`}
@@ -149,17 +151,7 @@ export default function DetailProduct() {
                   <h1 className='text-lg'>{t('genre')}: {detail.category !== null ? `${detail.category}` : `${t('updating')}`}</h1>
                   <h2 className='text-lg flex'>
                     {t('rating')}: {detail.ratingstars !== null ? `${detail.ratingstars}` : `${t('updating')}`}
-                    <ReactStars
-                      edit={false}
-                      count={5}
-                      value={detail.ratingstars}
-                      size={24}
-                      isHalf={true}
-                      emptyIcon={<i className="far fa-star"></i>}
-                      halfIcon={<i className="fa fa-star-half-alt"></i>}
-                      fullIcon={<i className="fa fa-star"></i>}
-                      activeColor="#ffd700"
-                    />
+                    <Rating name="read-only" value={Number(detail.ratingstars)} precision={0.5} readOnly />
                   </h2>
                   <h1 className='text-lg h-40 break-words'>{t('description')}: {detail.description !== null ? `${detail.description}` : `${t('updating')}`}</h1>
                   <h1>{t('sold')}: {detail.Product.sold !== null ? `${detail.Product.sold} cuốn` : `${t('updating')}`}</h1>
@@ -220,11 +212,10 @@ export default function DetailProduct() {
                               total: buy * detail.Product.price
                             }).then(() => {
                               showToastMessage("Thêm thành công");
-                              dispatch(addCart({
-                                product: detail.Product,
-                                cart: { amount: buy, total: buy * detail.Product.price }
-                              }));
-                              Product.updateProduct(detail.id, { sold: detail.Product.sold + buy }).then(() => { });
+                              CartApi.getList(user.id).then((res) => {
+                                dispatch(setCart(res.data));
+                              });
+                              Product.updateProduct(detail.id, { sold: detail.Product.sold + buy });
                             })
                           }
                         } else {
@@ -250,17 +241,17 @@ export default function DetailProduct() {
                         onClick={() => {
                           if (user) {
                             if (buy <= leftQuantity) {
-                              window.location.assign(`${import.meta.env.VITE_HOMEURL}cart/${user.id}`);
-                              dispatch(addCart({
-                                product: detail.Product,
-                                cart: { amount: buy, total: buy * detail.Product.price }
-                              }));
 
                               CartApi.addBook({
                                 amount: buy,
                                 ProductId: detail.Product.id,
                                 UserId: user.id,
                                 total: buy * detail.Product.price
+                              }).then(() => {
+                                CartApi.getList(user.id).then((res) => {
+                                  dispatch(setCart(res.data));
+                                  navigate(`/cart/${user.id}`)
+                                });
                               })
                             }
                           } else {

@@ -7,7 +7,7 @@ import { useTranslation } from 'react-i18next';
 import Rating from '@mui/material/Rating';
 
 
-export default function Comment({ comment, setComments, listCmt, user }) {
+export default function Comment({ comment, setComments, listCmt, user, detail, setDetail }) {
 
   const owner = useSelector(state => state.authentication.user);
   const { t } = useTranslation();
@@ -79,11 +79,16 @@ export default function Comment({ comment, setComments, listCmt, user }) {
                         .then(res => {
                           Detail.updatedDetailProduct({
                             ratingstars: updateStar(comment.rating)
-                          }, comment.ProductId).catch(err => {
+                          }, comment.ProductId).then(() => {
+                            Detail.getDetailProduct(detail.id).then((response) => {
+                              setDetail(response.data[0]);
+                            });
+                          }).catch(err => {
                             console.error(err);
                           });
                         }).catch(err => console.error(err));
                     }}
+                    className=' cursor-pointer'
                   >
                     {t('delete')}
                   </div>

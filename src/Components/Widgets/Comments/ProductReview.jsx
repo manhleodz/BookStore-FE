@@ -24,7 +24,7 @@ function getLabelText(value) {
 }
 
 
-export default function ProductReview({ id, detail }) {
+export default function ProductReview({ id, detail, setDetail }) {
 
 
   const [comments, setComments] = useState(null);
@@ -68,7 +68,11 @@ export default function ProductReview({ id, detail }) {
         setRating(0);
         Detail.updatedDetailProduct({
           ratingstars: Math.round(updateAddStar(rating) * 10) / 10
-        }, id).catch((error) => {
+        }, id).then(() => {
+          Detail.getDetailProduct(id).then((response) => {
+            setDetail(response.data[0]);
+          });
+        }).catch((error) => {
           console.log(error);
         });
 
@@ -171,7 +175,7 @@ export default function ProductReview({ id, detail }) {
             </div>
           )}
         </div>
-        <PaginatedItems comments={comments} setComments={setComments} />
+        <PaginatedItems comments={comments} setComments={setComments} detail={detail} setDetail={setDetail} />
       </div>
       {!user && (
         <div id='modal' style={{ display: 'none' }} onClick={(e) => { if (e.target.id === 'background') { document.getElementById('modal').style.display = 'none' } }}>
@@ -182,7 +186,7 @@ export default function ProductReview({ id, detail }) {
   )
 }
 
-function PaginatedItems({ comments, setComments }) {
+function PaginatedItems({ comments, setComments, detail, setDetail }) {
   // We start with an empty list of flashSale.
   const [currentflashSale, setCurrentflashSale] = useState(null);
   const [pageCount, setPageCount] = useState(0);
@@ -215,6 +219,8 @@ function PaginatedItems({ comments, setComments }) {
             user={book.User}
             setComments={setComments}
             listCmt={comments}
+            detail={detail}
+            setDetail={setDetail}
           />
         ))}
       </div>

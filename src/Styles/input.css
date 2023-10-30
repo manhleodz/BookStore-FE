@@ -20,6 +20,12 @@ code {
 
 /* @import url('https://fonts.googleapis.com/css?family=Raleway:400,700,900'); */
 
+input[type=password]::-ms-reveal,
+input[type=password]::-ms-clear
+{
+    display: none;
+}
+
 .search__container {
   padding-top: 8px;
   width: 100%;
@@ -240,6 +246,7 @@ background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.
 
 .page-item {
     font-size: 20px;
+    font-weight: 600;
     color: black;
     margin-left: 1rem;
     border: 1px solid;

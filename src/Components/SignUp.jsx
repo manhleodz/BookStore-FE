@@ -7,10 +7,6 @@ import { Authentication } from "../Network/Authentication";
 
 function Signup() {
 
-  useEffect(() => {
-    document.title = "Sign up";
-
-  }, []);
 
   const navigate = useNavigate();
 
@@ -21,7 +17,7 @@ function Signup() {
   const [excuting, setExcuting] = useState(false);
   const [alert, setAlert] = useState(null);
 
-  function signUp() {
+  const signUp = () => {
     Authentication.signUp(
       {
         username: username,
@@ -44,6 +40,11 @@ function Signup() {
       }
     )
   }
+
+  useEffect(() => {
+    document.title = "Sign up";
+
+  }, []);
 
   return (
     <>
@@ -191,7 +192,7 @@ function Signup() {
           }
         }}
       >
-        <Otp email={email} username={username} signUp={signUp}/>
+        <Otp email={email} username={username} signUp={signUp} />
       </div>
     </>
   );

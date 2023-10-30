@@ -8,11 +8,6 @@ import { setUser } from "../Redux/AuthenticationSlice";
 
 function Login() {
 
-  useEffect(() => {
-    document.title = "Sign in";
-
-  }, []);
-
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -56,6 +51,11 @@ function Login() {
       )
     }
   }
+
+  useEffect(() => {
+    document.title = "Sign in";
+
+  }, []);
 
   return (
     <>
@@ -120,7 +120,9 @@ function Login() {
                       <div className="relative">
                         <button
                           type="submit"
-                          className="bg-blue-500 text-white rounded-md px-2 py-1"
+                          onDoubleClick={(e) => e.preventDefault()}
+                          onClick={onSubmit}
+                          className="bg-blue-500 hover:bg-blue-600 active:bg-blue-700 active:ring-blue-400 ring-3 text-white rounded-md px-2 py-1"
                         >
                           Đăng nhập
                         </button>

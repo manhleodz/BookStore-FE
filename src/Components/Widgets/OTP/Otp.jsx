@@ -12,8 +12,6 @@ export default function Otp({ username, email, signUp }) {
         setOTP(Math.floor(Math.random() * 1000000));
     }, 600000);
 
-
-    console.log(OTP);
     return (
         <div
             className=' fixed top-0 left-0 w-screen h-screen z-50 flex justify-center items-center'
