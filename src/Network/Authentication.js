@@ -7,7 +7,7 @@ export const Authentication = {
         return axios.post(`${getApiUrl}/auth/login`, data).then((response) => {
             if (response) {
                 localStorage.setItem("accessToken", response.data.token);
-                const { user } = response.data;
+                const { user } = response.data.user;
                 success(user);
             }
         }).catch((err) => failure(err.response.data));

@@ -10,8 +10,6 @@ import 'react-phone-input-2/lib/style.css'
 import OtpInput from "otp-input-react";
 import toast from './Widgets/ToastMessage';
 
-
-
 export default function ProcessBill() {
 
   const billId = useParams().billId;
@@ -111,7 +109,6 @@ export default function ProcessBill() {
   }, [billId])
 
   if (!bill || !user || !books) return null;
-
 
   return (
     <div className=' h-full w-screen bg-gray-200'>
@@ -251,12 +248,12 @@ export default function ProcessBill() {
               {books.map((book, index) => (
                 <div key={index} className=' flex items-center justify-around pt-1'>
                   <div className=' flex w-1/2'>
-                    <img alt={book.product.name} src={book.product.image} className=' w-1/6' />
-                    <h1 className=''>{book.product.name}</h1>
+                    <img alt={book.Product.name} src={book.Product.image} className=' w-1/6' />
+                    <h1 className=''>{book.Product.name}</h1>
                   </div>
-                  <h1>{(book.product.price.toLocaleString())}đ</h1>
-                  <h1 className=' text-lg font-bold'>{book.cart.amount}</h1>
-                  <h1 className=' text-yellow-500 font-semibold'>{book.cart.total.toLocaleString()}đ</h1>
+                  <h1>{(book.Product.price.toLocaleString())}đ</h1>
+                  <h1 className=' text-lg font-bold'>{book.amount}</h1>
+                  <h1 className=' text-yellow-500 font-semibold'>{book.total.toLocaleString()}đ</h1>
                 </div>
               ))}
             </div>
@@ -284,7 +281,6 @@ export default function ProcessBill() {
               </div>
             </div>
           </div>
-
           <div
             className=' w-screen h-screen hidden' id='OTP'
             onClick={(e) => {

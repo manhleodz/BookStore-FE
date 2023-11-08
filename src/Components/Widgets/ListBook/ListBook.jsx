@@ -22,11 +22,10 @@ export default function ListBook({ flashSale }) {
     >
       <div className='w-9/12 relative justify-center items-center shadow-2xl mt-10 bg-white'>
         <div className=' w-full flex justify-start space-x-3 max-xl:space-x-0'>
-          <div className='w-2/12'>
+          <div className='w-2/12 max-xl:w-0'>
             <button
               onClick={() => {
                 setOpenFilter(!openFilter);
-                console.log(openFilter)
               }}
               className=' absolute z-50 p-2 border-2 border-gray-400 bg-gray-200 rounded-lg hidden max-2xl:block'>
               <svg xmlns="http://www.w3.org/2000/svg" height="1.3em" viewBox="0 0 448 512" className=' fill-gray-400'>
@@ -39,7 +38,7 @@ export default function ListBook({ flashSale }) {
               <FilterBar flashSale={flashSale} filteredData={filteredData} setFilteredData={setFilteredData} />
             </div>
           </div>
-          <div className=' w-full flex flex-col justify-start'>
+          <div className=' w-full flex flex-col justify-start max-xl:justify-center'>
             <div className=' absolute right-5 top-2'>
               <h1 className=' text-lg font-semibold'>Sắp xếp theo</h1>
               <button
@@ -189,17 +188,17 @@ function PaginatedItems({ flashSale }) {
             marginPagesDisplayed={2}
             pageCount={pageCount}
             previousLabel="<-"
-            pageClassName="page-item"
-            pageLinkClassName="page-link"
-            previousClassName="page-item"
-            previousLinkClassName="page-link"
-            nextClassName="page-item"
-            nextLinkClassName="page-link"
+            pageClassName="page-item p-1"
+            pageLinkClassName="page-link p-1"
+            previousClassName="page-item p-1"
+            previousLinkClassName="page-link p-1"
+            nextClassName="page-item p-1"
+            nextLinkClassName="page-link p-1"
             breakLabel="..."
-            breakClassName="page-item"
-            breakLinkClassName="page-link"
-            containerClassName="pagination"
-            activeClassName="active"
+            breakClassName="page-item p-1"
+            breakLinkClassName="page-link p-1"
+            containerClassName="pagination p-1"
+            activeClassName="active p-1"
             renderOnZeroPageCount={null}
           />
         </>

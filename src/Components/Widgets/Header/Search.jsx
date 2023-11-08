@@ -11,21 +11,11 @@ export default function Search() {
     const navigate = useNavigate();
     const { t } = useTranslation();
 
+
     const filteredData = useSelector((state) => state.authentication.filteredData);
 
     const [wordEntered, setWordEntered] = useState("");
     const [data, setData] = useState([]);
-
-    useEffect(() => {
-        Product.getList().then((res) => {
-
-            let arr = [];
-            for (let i of res.data) {
-                arr.push(i.product);
-            }
-            setData(arr);
-        });
-    }, [])
 
     function removeAccents(str) {
         var AccentsMap = [
@@ -53,9 +43,9 @@ export default function Search() {
     const handleFilter = (event) => {
 
         const searchWord = event.target.value;
-        setWordEntered(removeAccents(searchWord));
+        setWordEntered((searchWord));
         const newFilter = data.filter((value) => {
-            return removeAccents(value.name).toLowerCase().includes(searchWord.toLowerCase());
+            return removeAccents(value.name).toLowerCase().includes(removeAccents(searchWord).toLowerCase());
         });
 
         if (searchWord === "") {
@@ -65,12 +55,25 @@ export default function Search() {
         }
     };
 
-    if (!data) return null;
 
     const clearInput = () => {
         dispatch(setFilteredData([]));
         setWordEntered("");
     };
+
+    useEffect(() => {
+        Product.getList().then((res) => {
+
+            let arr = [];
+            for (let i of res.data) {
+                arr.push(i.product);
+            }
+            setData(arr);
+        });
+    }, [])
+
+    if (!data) return null;
+
     return (
         <div
             className="search__container focus:outline-0"
@@ -90,17 +93,24 @@ export default function Search() {
                     }}
                 />
                 {filteredData.length !== 0 && (
-                    <div className="dataResult absolute w-full bg-white max-h-40 overflow-auto outline-none">
+                    <div className="dataResult absolute w-full bg-white max-h-96 shadow-2xl overflow-y-scroll outline-none p-2">
                         {filteredData.slice(0, 15).map((value, key) => {
                             return (
-                                <div key={key} className=" dataItem cursor-pointer hover:bg-slate-100"
-                                    style={{ wordBreak: "break-all", textOverflow: "ellipsis", whiteSpace: "nowrap", overflow: 'hidden' }}
+                                <div key={key} className=" dataItem cursor-pointer hover:bg-slate-100 flex items-center space-x-5"
                                     onClick={() => {
                                         navigate(`/detail/${value.name}/${value.id}`)
                                         clearInput();
                                     }}
                                 >
-                                    <p>{value.name} </p>
+ 
+                                    <img alt='...' src={`${value.image}`} className='h-20 w-20 object-cover' />
+                                    <div className=' flex'>
+                                        <p
+                                            className='' style={{ wordBreak: "break-all", textOverflow: "ellipsis", whiteSpace: "nowrap", overflow: 'hidden', maxWidth: '300px' }}
+                                        >
+                                            {value.name}
+                                        </p>
+                                    </div>
                                 </div>
                             );
                         })}

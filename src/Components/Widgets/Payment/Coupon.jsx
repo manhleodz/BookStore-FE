@@ -6,7 +6,7 @@ export default function Coupon({ setCouponId, coupon, setAfterCoupon, total }) {
     const [selectedCoupon, setSelectedCoupon] = useState("");
 
     return (
-        <div className=' w-full text-sm text-left text-gray-500 dark:text-gray-400 mx-10 rounded-lg'>
+        <div className=' w-full text-sm text-left text-gray-500 dark:text-gray-400 mx-10 max-xl:mx-0 rounded-lg'>
             <div className=' bg-gray-50 rounded-lg p-3'>
                 <div className=' text-2xl flex items-center justify-between'>
                     <div className='flex items-center '>

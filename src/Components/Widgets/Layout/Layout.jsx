@@ -38,8 +38,6 @@ export default function Layout({ children }) {
     }
   }, [dispatch]);
 
-  // if (!user) return null;
-
   return (
     <div className=' h-full w-screen'>
       <div className=''>

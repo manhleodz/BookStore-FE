@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react'
-import ReactStars from "react-rating-stars-component";
 import { Detail } from '../Network/Detail';
 import { useNavigate, useParams } from 'react-router-dom';
 import { Product } from '../Network/Product';
 import Loading from './Widgets/Loading/Loading';
+import ToastMessage from './Widgets/ToastMessage';
 import { useDispatch, useSelector } from "react-redux";
 import { addCart, setCart } from "../Redux/AuthenticationSlice";
 import { CartApi } from '../Network/Cart';
@@ -63,11 +63,11 @@ export default function DetailProduct() {
   const leftQuantity = detail.Product.quantity - detail.Product.sold;
 
   return (
-    <div className=''>
+    <>
       <div className=' relative top-52 w-full justify-center h-full bg-gray-200'>
         <div className=' flex flex-col items-center justify-center space-y-10'>
           <div className='w-9/12 h-auto shadow-lg rounded-lg bg-white block'>
-            <div className='p-5 flex'>
+            <div className='p-5 flex max-xl:flex-col'>
               <div className=' w-full relative'>
                 <div className='flex w-full'>
                   <div className='space-y-2 w-1/6 overflow-auto h-auto' style={{ maxHeight: '500px' }}>
@@ -171,12 +171,21 @@ export default function DetailProduct() {
                           }}>
                           -
                         </button>
-                        <input className='font-semibold w-1/6 text-center active:ring-0 active:border-none outline-none' value={buy} onBlur={(e) => {
-                          if (e.target.value === '') {
-                            setBuy(1);
-                            e.target.value = 1;
-                          }
-                        }} onChange={(e) => setBuy(e.target.value)} />
+                        <input className='font-semibold w-1/6 text-center active:ring-0 active:border-none outline-none' value={buy}
+                          onBlur={(e) => {
+                            if (e.target.value === '' || e.target.value !== Number) {
+                              setBuy(1);
+                              e.target.value = 1;
+                            }
+                          }}
+                          onChange={(e) => {
+                            if (e.target.value === 1) {
+                              setBuy(Number(e.target.value))
+                            } else {
+                              setBuy();
+                            }
+                          }}
+                        />
                         <button
                           className='active:scale-150 text-xl px-1'
                           onClick={() => {
@@ -215,11 +224,13 @@ export default function DetailProduct() {
                               CartApi.getList(user.id).then((res) => {
                                 dispatch(setCart(res.data));
                               });
-                              Product.updateProduct(detail.id, { sold: detail.Product.sold + buy });
+                            }).catch((err) => {
+
+                              ToastMessage.showToastWarnMessage(err.response.data);
                             })
                           }
                         } else {
-                          alert('Bạn cần đăng nhập để sử dụng');
+                          ToastMessage.showToastWarnMessage('Bạn cần đăng nhập để sử dụng');
                         }
                       }}
                       disabled={detail.Product.sold === detail.Product.quantity}
@@ -229,7 +240,7 @@ export default function DetailProduct() {
                       </svg>
                       {t('AddToCart')}
                     </button>
-                    <ToastContainer autoClose={3000} />
+                    <ToastContainer autoClose={1000} />
                     {detail.Product.sold === detail.Product.quantity ? (
                       <button
                         className={` cursor-default focus:outline-none text-black bg-gray-500 font-medium rounded-lg text-lg px-5 py-2.5 mr-2 mb-2 w-6/12 focus:ring-1 `}
@@ -324,6 +335,6 @@ export default function DetailProduct() {
           <ProductReview id={id} detail={detail} setDetail={setDetail} />
         </div>
       </div>
-    </div>
+    </>
   )
 }

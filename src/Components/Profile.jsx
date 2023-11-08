@@ -35,11 +35,11 @@ export default function Profile() {
     <div className=' bg-gray-200 w-full h-full'>
       <div className=' relative top-52'>
         <div className='flex flex-col justify-center items-center'>
-          <div className=' w-9/12 flex justify-between'>
-            <div className=' w-3/12 px-3'>
+          <div className=' w-9/12 flex justify-between max-xl:flex-col'>
+            <div className=' w-3/12 px-3 max-xl:px-0 max-xl:w-full'>
               <SideBar />
             </div>
-            <div className=' bg-white rounded-lg text-xl w-9/12 shadow-xl'>
+            <div className=' bg-white rounded-lg text-xl w-9/12 max-xl:w-full max-xl:mt-4 shadow-xl'>
               <div className=' p-6 ' style={{minHeight: '400px'}}>
                 <Outlet />
               </div>

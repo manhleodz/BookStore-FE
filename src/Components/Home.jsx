@@ -51,10 +51,10 @@ export default function Home() {
         <div className='flex flex-col items-center justify-center'>
           <div className='w-10/12 flex items-center justify-center'>
             <div className=' flex items-center justify-center space-x-2 w-full'>
-              <div className='w-8/12 relative block'>
+              <div className='w-8/12 relative block max-xl:w-11/12'>
                 <Banner />
               </div>
-              <div className=' space-y-2'>
+              <div className=' space-y-2 max-xl:hidden'>
                 <img alt='...' src='https://img.freepik.com/free-vector/flat-world-book-day-sale-horizontal-banner-template_23-2149348033.jpg'
                   className=' cursor-pointer h-52 object-cover'
                 />

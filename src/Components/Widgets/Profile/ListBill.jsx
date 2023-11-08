@@ -23,20 +23,20 @@ export default function ListBill({ bill, bills, getBill }) {
                 <div
                     className=' w-1/6 cursor-pointer'
                     onClick={() => {
-                        window.location.assign(`${import.meta.env.VITE_HOMEURL}bill/${bill.id}`)
+                        navigate(`/bill/${bill.id}`)
                     }}
                 >
-                    <img alt='sp' src={cart[0].product.image} className=' w-full' />
+                    <img alt='sp' src={cart[0].Product.image} className=' w-full' />
                 </div>
             ) : (
                 <div
                     className=' w-1/6 grid grid-cols-2 grid-rows-2 cursor-pointer'
                     onClick={() => {
-                        window.location.assign(`${import.meta.env.VITE_HOMEURL}bill/${bill.id}`)
+                        navigate(`/bill/${bill.id}`)
                     }}
                 >
                     {cart.slice(0, 4).map((book, index) => (
-                        <img alt='sp' key={index} src={book.product.image} className='w-full border border-gray-200' />
+                        <img alt='sp' key={index} src={book.Product.image} className='w-full border border-gray-200' />
                     ))}
                     {cart.length > 4 && (<h1 className=' text-base text-gray-400'>Còn thêm</h1>)}
                 </div>
@@ -45,14 +45,14 @@ export default function ListBill({ bill, bills, getBill }) {
             <div
                 className=' w-6/12 cursor-pointer'
                 onClick={() => {
-                    window.location.assign(`${import.meta.env.VITE_HOMEURL}bill/${bill.id}`)
+                    navigate(`/bill/${bill.id}`)
                 }}
             >
                 <ul className=' list-disc'>
                     {cart.map((book, index) => (
                         <li className=' flex items-start justify-between text-base w-full' key={index}>
-                            {book.product.name}
-                            <h1 className=' ml-5'>x{book.cart.amount}</h1>
+                            {book.Product.name}
+                            <h1 className=' ml-5'>x{book.amount}</h1>
                         </li>
                     ))}
                 </ul>

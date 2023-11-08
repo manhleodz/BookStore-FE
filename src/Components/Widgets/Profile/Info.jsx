@@ -103,7 +103,7 @@ export default function Info() {
 
   const timer = setTimeout(() => {
     setOTP(Math.floor(Math.random() * 1000000));
-  }, 640000);
+  }, 64000);
 
   if (!user) return null;
 

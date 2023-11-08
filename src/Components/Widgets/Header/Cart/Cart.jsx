@@ -31,7 +31,7 @@ export default function Cart() {
         </div>
       </div>
       <div
-        className=' fixed right-56 max-lg:right-0 max-w-md shadow-lg rounded-lg bg-white text-xl'
+        className=' fixed right-56 max-2xl:right-0 max-w-md shadow-lg rounded-lg bg-white text-xl'
         id='dropdown-content'
       >
         <div className='p-2'>
@@ -65,21 +65,21 @@ export default function Cart() {
                     {cart.map((book, index) => (
                       <tr key={index} className="bg-white border-b  hover:bg-gray-50 ">
                         <td className="w-3/12">
-                          <img src={book.product.image} alt={book.product.name} className='' />
+                          <img src={book.Product.image} alt={book.Product.name} className='' />
                         </td>
                         <td className='w-2/12' >
-                          <h1>{book.product.name}</h1>
+                          <h1>{book.Product.name}</h1>
                         </td>
                         <td className='pl-3'>
-                          <h1>{book.product.price}đ</h1>
+                          <h1>{book.Product.price}đ</h1>
                         </td>
                         <td>
                           <div className="bg-gray-50 w-8 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block px-2.5 py-1 ">
-                            {book.cart.amount}
+                            {book.amount}
                           </div>
                         </td>
                         <td>
-                          <h1>{book.cart.total}</h1>
+                          <h1>{book.total}</h1>
                         </td>
 
                       </tr>
@@ -92,8 +92,7 @@ export default function Cart() {
         </div>
         <div
           onClick={() => {
-            window.location.assign(`${import.meta.env.VITE_HOMEURL}cart/${user.id}`);
-            // navigate(`/cart/${user.id}`)
+            navigate(`cart/${user.id}`);
           }}
           type="button"
           className=" text-white cursor-pointer flex items-end justify-center bg-green-700 hover:bg-green-800 focus:outline-none focus:ring-4 focus:ring-green-300 font-medium rounded-full text-sm px-5 py-2.5 text-center mx-2 mb-2 ">

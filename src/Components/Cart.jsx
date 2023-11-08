@@ -23,7 +23,7 @@ export default function Cart() {
     const [afterCoupon, setAfterCoupon] = useState(0);
     const [loading, setLoading] = useState(true);
     const [couponId, setCouponId] = useState(null);
-    var total = 0;
+    var total = 0;  
 
     useEffect(() => {
 
@@ -36,7 +36,6 @@ export default function Cart() {
         }, 1000);
         return () => clearTimeout(timer);
     }, [total])
-
 
     if (selected.length > 0) {
         selected.map(cart => total += cart.total);
@@ -72,14 +71,14 @@ export default function Cart() {
             ) : (
                 <div className='relative top-52 bg-gray-200'>
                     <div className='flex flex-col items-center justify-center mb-10'>
-                        <div className='w-9/12 flex justify-center'>
-                            <div className="relative overflow-x-auto shadow-md sm:rounded-lg w-8/12 bg-gray-50">
+                        <div className='w-9/12 flex justify-center max-xl:flex-col'>
+                            <div className="relative overflow-x-auto shadow-md sm:rounded-lg w-8/12 max-xl:w-full bg-gray-50">
                                 <Table selected={selected} setSelected={setSelected} userId={userId} total={total} />
                             </div>
 
-                            <div className=' relative space-y-5'>
+                            <div className=' relative space-y-5 max-xl:space-y-0 max-xl:space-x-5 max-xl:flex max-xl:mt-4'>
                                 <Coupon setCouponId={setCouponId} coupon={coupon} setAfterCoupon={setAfterCoupon} total={total} />
-                                <div className=' w-full text-2xl text-left font-semibold mx-10 rounded-lg bg-white p-4 flex flex-col shadow-xl justify-center items-center'>
+                                <div className=' w-full text-2xl text-left font-semibold mx-10 max-xl:mx-0 rounded-lg bg-white p-4 flex flex-col shadow-xl justify-center items-center'>
                                     <div className=' w-full h-auto bg-white text-xl flex justify-between mb-5'>
                                         Thành tiền: <span>{total !== 0 ? (total).toLocaleString() : 0}Đ</span>
                                     </div>
@@ -89,46 +88,50 @@ export default function Cart() {
                                     <div>
                                         <button
                                             onClick={() => {
-                                                if (afterCoupon !== 0) {
+                                                if (selected.length !== 0) {
+                                                    if (afterCoupon !== 0) {
 
-                                                    Bill.createBill({
-                                                        phone: user.phonenumber,
-                                                        address: user.address,
-                                                        price: total,
-                                                        status: 'đang xử lý',
-                                                        CouponId: couponId,
-                                                        UserId: user.id,
-                                                        payment: afterCoupon
-                                                    }).then((res) => {
-                                                        if (res.status === 200) {
-                                                            for (let i = 0; i < selected.length; i++) {
-                                                                CartApi.updateCart({ BillId: res.data.id }, selected[i].id);
-
-                                                                const index = cart.findIndex((c) => c.cart.id === selected[i].id)
-                                                                dispatch(deleteCart(index));
+                                                        Bill.createBill({
+                                                            phone: user.phonenumber,
+                                                            address: user.address,
+                                                            price: total,
+                                                            status: 'đang xử lý',
+                                                            CouponId: couponId,
+                                                            UserId: user.id,
+                                                            payment: afterCoupon
+                                                        }).then((res) => {
+                                                            if (res.status === 200) {
+                                                                for (let i = 0; i < selected.length; i++) {
+                                                                    CartApi.updateCart({ BillId: res.data.id }, selected[i].id).then(() => {
+                                                                        const index = cart.findIndex((c) => c.cart.id === selected[i].id)
+                                                                        dispatch(deleteCart(index));
+                                                                    });
+                                                                }
+                                                                navigate(`/bill/${res.data.id}`);
                                                             }
-                                                            navigate(`/bill/${res.data.id}`);
-                                                        }
-                                                    })
+                                                        })
+                                                    } else {
+                                                        Bill.createBill({
+                                                            phone: user.phonenumber,
+                                                            address: user.address,
+                                                            price: total,
+                                                            status: 'đang xử lý',
+                                                            UserId: user.id,
+                                                            payment: total
+                                                        }).then((res) => {
+                                                            if (res.status === 200) {
+                                                                for (let i = 0; i < selected.length; i++) {
+                                                                    CartApi.updateCart({ BillId: res.data.id }, selected[i].id);
+
+                                                                    const index = cart.findIndex((c) => c.id === selected[i].id)
+                                                                    dispatch(deleteCart(index));
+                                                                }
+                                                                navigate(`/bill/${res.data.id}`);
+                                                            }
+                                                        })
+                                                    }
                                                 } else {
-                                                    Bill.createBill({
-                                                        phone: user.phonenumber,
-                                                        address: user.address,
-                                                        price: total,
-                                                        status: 'đang xử lý',
-                                                        UserId: user.id,
-                                                        payment: total
-                                                    }).then((res) => {
-                                                        if (res.status === 200) {
-                                                            for (let i = 0; i < selected.length; i++) {
-                                                                CartApi.updateCart({ BillId: res.data.id }, selected[i].id);
-
-                                                                const index = cart.findIndex((c) => c.cart.id === selected[i].id)
-                                                                dispatch(deleteCart(index));
-                                                            }
-                                                            navigate(`/bill/${res.data.id}`);
-                                                        }
-                                                    })
+                                                    alert("Bạn chưa chọn sản phầm nào");
                                                 }
                                             }}
                                             type="button"
