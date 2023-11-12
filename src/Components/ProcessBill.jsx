@@ -14,7 +14,6 @@ export default function ProcessBill() {
 
   const billId = useParams().billId;
   const [bill, getBill] = useState();
-  const [books, getBook] = useState();
   const [open, getOpen] = useState(false);
   const [name, getName] = useState();
   const [phone, getPhone] = useState();
@@ -100,15 +99,9 @@ export default function ProcessBill() {
     }).catch(err => {
       console.log(err);
     });
-
-    CartApi.getCartByBillId(billId).then(res => {
-      getBook(res.data);
-    }).catch(err => {
-      console.log(err);
-    });
   }, [billId])
 
-  if (!bill || !user || !books) return null;
+  if (!bill || !user) return null;
 
   return (
     <div className=' h-full w-screen bg-gray-200'>
@@ -245,7 +238,7 @@ export default function ProcessBill() {
           <div className=' w-10/12 shadow-sm bg-white p-5 divide-y-2 divide-gray-200 mb-56'>
             <h1 className=' text-xl font-semibold'>Kiểm tra lại đơn hàng</h1>
             <div className=' space-y-3 divide-y-2 divide-gray-200'>
-              {books.map((book, index) => (
+              {bill.Carts.map((book, index) => (
                 <div key={index} className=' flex items-center justify-around pt-1'>
                   <div className=' flex w-1/2'>
                     <img alt={book.Product.name} src={book.Product.image} className=' w-1/6' />

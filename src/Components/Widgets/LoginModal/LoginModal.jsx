@@ -7,24 +7,13 @@ export default function LoginModal() {
 
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [excuting, setExcuting] = useState(false);
-  const [alert, setAlert] = useState(null);
+  const [alert, setAlert] = useState();
   const [forgot, setForgot] = useState(false);
   const dispatch = useDispatch();
 
   const onSubmit = (e) => {
     e.preventDefault();
-    setExcuting(true);
-    setAlert(null);
-    if (username.length < 6) {
-      setExcuting(false);
-      setAlert("Tên người dùng gồm ít nhất 6 chữ cái")
-    } else if (password.length < 8) {
-      setExcuting(false);
-      setAlert("Mật khẩu phải nhiều hơn 7 kí tự");
-    }
-
-    if (excuting) {
+    if (!alert) {
       Authentication.login(
         {
           username: username,
@@ -55,12 +44,18 @@ export default function LoginModal() {
           <h1 className=' text-sm text-gray-500'>Tên người dùng</h1>
           <input
             className='active:ring-blue-400 active:border-blue-400 focus-within:ring-blue-400 focus-within:border-blue-400 ring-1 w-full border border-gray-600 rounded-md h-9 px-2' placeholder='Nhập tên người dùng'
-            onClick={(e) => {
+            onChange={(e) => {
               setUsername(e.target.value);
+              if (e.target.value.length < 6) {
+                setAlert("Tên người dùng gồm ít nhất 6 chữ cái");
+              } else {
+                setAlert();
+              }
             }}
+            value={username}
           />
           {(alert === "Tên người dùng không tồn tại" || alert === "Tên người dùng gồm ít nhất 6 chữ cái") && (
-            <h1 className=" text-red-600 font-semibold text-base absolute">
+            <h1 className=" text-red-600 font-semibold text-sm absolute">
               {alert}
             </h1>
           )}
@@ -72,9 +67,15 @@ export default function LoginModal() {
               <input
                 id='password' type="password"
                 className=' rounded-l-md h-9 px-2 w-full' placeholder='Nhập tên người dùng'
-                onClick={(e) => {
+                onChange={(e) => {
+                  if (e.target.value.length < 8) {
+                    setAlert("Mật khẩu phải nhiều hơn 7 kí tự");
+                  } else {
+                    setAlert();
+                  }
                   setPassword(e.target.value);
                 }}
+                value={password}
               />
               <h1
                 className=' cursor-pointer border rounded-r-md h-9 px-2 py-1 bg-gray-300'
@@ -91,7 +92,7 @@ export default function LoginModal() {
               </h1>
             </div>
             {(alert === "Mật khẩu phải nhiều hơn 7 kí tự" || alert === "Sai mật khẩu") && (
-              <h1 className="text-red-600 font-semibold text-base absolute">
+              <h1 className="text-red-600 font-semibold text-sm absolute my-3">
                 {alert}
               </h1>
             )}
@@ -101,8 +102,11 @@ export default function LoginModal() {
           <></>
         )}
         <button onClick={onSubmit} className=' w-1/3 p-2 bg-green-600 text-white rounded-md font-medium hover:bg-green-700 active:ring-1 active:ring-green-400'>Đăng nhập</button>
-        <button onClick={onSubmit} className=' w-1/3 p-2 border-2 text-green-600 font-medium border-green-600 rounded-md active:ring-1 active:ring-green-400'>Bỏ qua</button>
-        <button onClick={onSubmit} className=' w-1/3 p-2 border-2 text-green-600 font-medium border-green-600 rounded-md active:ring-1 active:ring-green-400'>Quay lại</button>
+        <button onClick={() => {
+          document.getElementById('modal').style.display = 'none';
+        }}
+          className=' w-1/3 p-2 border-2 text-green-600 font-medium border-green-600 rounded-md active:ring-1 active:ring-green-400'>Bỏ qua
+        </button>
       </div>
     </div>
   )

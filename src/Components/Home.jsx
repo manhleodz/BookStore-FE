@@ -5,6 +5,7 @@ import FlasheSale from './Widgets/FlashSale/FlasheSale';
 import ListBook from './Widgets/ListBook/ListBook';
 import { Product } from '../Network/Product';
 import Footer from './Widgets/Footer/Footer';
+import ListByCategory from './Widgets/ListByCategory/ListByCategory';
 
 export default function Home() {
 
@@ -68,6 +69,8 @@ export default function Home() {
           <ListBook
             flashSale={shuffleArray(flashSale)}
           />
+          <ListByCategory category={'Tiểu thuyết'}/>
+          <ListByCategory category={'Gia đình'}/>
         </div>
         <Footer />
       </div>

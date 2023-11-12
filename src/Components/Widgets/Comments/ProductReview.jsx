@@ -99,10 +99,10 @@ export default function ProductReview({ id, detail, setDetail }) {
     <div className=' bg-white w-9/12 h-auto p-5 rounded-lg'>
 
       <div className=' space-y-4 divide-y-2 divide-gray-300'>
-        <div className=' flex  max-xl:flex-col  max-xl:items-center'>
-          <div className=' w-5/12  max-xl:w-full'>
+        <div className=' flex  max-2xl:flex-col  max-xl:items-center'>
+          <div className=' w-5/12  max-2xl:w-full'>
             <h1 className='text-2xl font-semibold'>{t('ratingProduct')}</h1>
-            <div className=' flex items-center  max-xl:justify-center space-x-3 w-full'>
+            <div className=' flex items-center  max-2xl:justify-center space-x-3 w-full'>
               <div className='text-center'>
                 <div>
                   <span className=' text-6xl font-semibold'>{detail.ratingstars == null ? 0 : detail.ratingstars}</span>
@@ -128,7 +128,7 @@ export default function ProductReview({ id, detail, setDetail }) {
             </div>
           </div>
           {user ? (
-            <div className=' w-8/12  max-xl:w-full flex flex-col items-center justify-center'>
+            <div className=' w-8/12  max-2xl:w-full flex flex-col items-center justify-center'>
               <h1 className=' text-2xl'>{t('commented')}</h1>
 
               <div

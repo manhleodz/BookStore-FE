@@ -3,7 +3,7 @@ import { toast } from 'react-toastify';
 const showToastInfoMessage = (title) => {
     toast.info(title, {
         position: "top-right",
-        autoClose: 5000,
+        autoClose: 1000,
         hideProgressBar: false,
         closeOnClick: true,
         pauseOnHover: true,
@@ -17,7 +17,7 @@ const showToastInfoMessage = (title) => {
 const showToastWarnMessage = (title) => {
     toast.warn(title, {
         position: "top-right",
-        autoClose: 5000,
+        autoClose: 1000,
         hideProgressBar: false,
         closeOnClick: true,
         pauseOnHover: true,
@@ -30,7 +30,8 @@ const showToastWarnMessage = (title) => {
 
 const showToastSuccessMessage = (title) => {
     toast.success(title, {
-        position: toast.POSITION.TOP_RIGHT
+        position: toast.POSITION.TOP_RIGHT,
+        autoClose: 1000,
     });
 };
 

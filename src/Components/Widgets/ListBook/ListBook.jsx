@@ -27,13 +27,13 @@ export default function ListBook({ flashSale }) {
               onClick={() => {
                 setOpenFilter(!openFilter);
               }}
-              className=' absolute z-50 p-2 border-2 border-gray-400 bg-gray-200 rounded-lg hidden max-2xl:block'>
+              className=' absolute z-30 p-2 border-2 border-gray-400 bg-gray-200 rounded-lg hidden max-xl:block'>
               <svg xmlns="http://www.w3.org/2000/svg" height="1.3em" viewBox="0 0 448 512" className=' fill-gray-400'>
                 <path d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z" />
               </svg>
             </button>
             <div
-              className={` w-full max-xl:absolute bg-white z-10 duration-1000 -translate-w-full transition ${!openFilter && ' -scale-x-0'}`}
+              className={` w-full max-xl:absolute max-xl:w-5/12 max-xl:bg-gray-100 z-10 duration-1000 -translate-w-full transition ${!openFilter && ' max-xl:hidden'}`}
             >
               <FilterBar flashSale={flashSale} filteredData={filteredData} setFilteredData={setFilteredData} />
             </div>

@@ -12,6 +12,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import ProductReview from './Widgets/Comments/ProductReview';
 import { useTranslation } from 'react-i18next';
 import Rating from '@mui/material/Rating';
+import ListByCategory2 from './Widgets/ListByCategory/ListByCategory2';
 
 
 
@@ -70,41 +71,62 @@ export default function DetailProduct() {
             <div className='p-5 flex max-xl:flex-col'>
               <div className=' w-full relative'>
                 <div className='flex w-full'>
-                  <div className='space-y-2 w-1/6 overflow-auto h-auto' style={{ maxHeight: '500px' }}>
-                    <div
-                      key={id}
-                      className='focus:outline-none w-11/12  cursor-pointer focus:ring-4 focus:ring-red-300'
+                  <div className=' w-1/6'>
+                    {(<button
+                      className=' text-xl w-full text-center bg-gray-200'
                       onClick={() => {
-                        setShowImg(detail.Product.image);
+                        document.getElementById('container').scrollTop -= 200;
+                        console.log(document.getElementById('container').scrollTop);
                       }}
                     >
-                      <img alt='...' src={`${detail.Product.image}`} className='max-h-40' />
-                    </div>
-                    {images !== null && (
-                      <div className=' overflow-auto'>
-                        {images.map((image, id) => (
-                          <div
-                            key={id}
-                            className='focus:outline-none w-11/12 cursor-pointer focus:ring-4 focus:ring-red-300'
-                            onClick={() => {
-                              setShowImg(image.path);
-                            }}
-                          >
-                            <img alt='...' src={`${image.path}`} className='side_nav_item max-h-40 object-cover' />
+                      Up
+                    </button>)}
+                    <div className='w-full overflow-x-hidden overflow-y-hidden' style={{ height: '500px' }} id='container' >
+                      <div className='space-y-2 w-full' id='images' style={{ maxHeight: `${(detail.ImageProducts.length + 1) * 100}px` }}>
+                        <div
+                          key={id}
+                          className='focus:outline-none w-11/12 cursor-pointer focus:ring-4 focus:ring-red-300'
+                          onClick={() => {
+                            setShowImg(detail.Product.image);
+                          }}
+                        >
+                          <img alt='...' src={`${detail.Product.image}`} className='max-h-40' />
+                        </div>
+                        {images !== null && (
+                          <div className=' overflow-auto'>
+                            {images.map((image, id) => (
+                              <div
+                                key={id}
+                                className='focus:outline-none w-11/12 my-1 cursor-pointer focus:ring-4 focus:ring-red-300'
+                                onClick={() => {
+                                  setShowImg(image.path);
+                                }}
+                              >
+                                <img alt='...' src={`${image.path}`} className='side_nav_item max-h-40 object-cover' />
+                              </div>
+                            ))}
                           </div>
-                        ))}
+                        )}
                       </div>
-                    )}
+                    </div>
+                    <button
+                      className=' text-xl w-full text-center bg-gray-200'
+                      onClick={() => {
+                        document.getElementById('container').scrollTop += 200;
+                        console.log(document.getElementById('container').scrollTop);
+                      }}
+                    >Down
+                    </button>
                   </div>
                   <div className='flex items-center justify-center h-auto w-full'>
                     <div className='p-12 max-w-lg'>
-                      <img alt='...' src={showImg !== detail.ImageProducts.image ? showImg : detail.Product.image} className='' style={{ maxHeight: "500px" }} />
+                      <img alt='...' src={showImg !== detail.ImageProducts.image ? showImg : detail.Product.image} className='' style={{ height: "500px" }} />
                     </div>
                   </div>
                 </div>
               </div>
               <div className='pl-10 relative w-full'>
-                <h1 className='text-4xl font-normal'>{detail.Product.name}</h1>
+                <h1 className='text-3xl font-normal'>{detail.Product.name}</h1>
                 <div className='grid grid-cols-2 max-sm:grid-cols-1 pt-2'>
                   <div className='space-y-4'>
                     <h1 className='text-lg'>{t('author')}:
@@ -123,12 +145,13 @@ export default function DetailProduct() {
                     <span
                       className='font-medium text-blue-600 cursor-pointer hover:underline'
                       onClick={() => {
+                        window.open(`https://vi.wikipedia.org/wiki/${detail.publisher}`, '_blank', 'noopener,noreferrer');
                       }}>
                       {detail.publisher !== null ? `${detail.publisher}` : `${t('updating')}`}
                     </span>
                   </h2>
                 </div>
-                <h1 className='text-3xl text-red-700 font-medium'>{detail.Product.price !== null ? `${detail.Product.price.toLocaleString()}đ` : `${t('updating')}`}</h1>
+                <h1 className='text-4xl text-red-700 font-bold'>{detail.Product.price !== null ? `${detail.Product.price.toLocaleString()}đ` : `${t('updating')}`}</h1>
                 <div className='space-y-5'>
                   <h1 className='flex text-lg'>{t('express')}:
                     <div className='pl-4'>
@@ -171,18 +194,18 @@ export default function DetailProduct() {
                           }}>
                           -
                         </button>
-                        <input className='font-semibold w-1/6 text-center active:ring-0 active:border-none outline-none' value={buy}
+                        <input className='font-semibold w-full text-center active:ring-0 active:border-none outline-none'
+                          value={buy}
                           onBlur={(e) => {
-                            if (e.target.value === '' || e.target.value !== Number) {
+                            if (buy === '') {
                               setBuy(1);
-                              e.target.value = 1;
                             }
                           }}
                           onChange={(e) => {
-                            if (e.target.value === 1) {
+                            if (Number(e.target.value) < 100000 && Number(e.target.value) >= 0) {
                               setBuy(Number(e.target.value))
                             } else {
-                              setBuy();
+                              setBuy(1);
                             }
                           }}
                         />
@@ -225,7 +248,10 @@ export default function DetailProduct() {
                                 dispatch(setCart(res.data));
                               });
                             }).catch((err) => {
-
+                              Detail.getDetailProduct(id).then((response) => {
+                                setDetail(response.data[0]);
+                                setShowImg(response.data[0].Product.image);
+                              });
                               ToastMessage.showToastWarnMessage(err.response.data);
                             })
                           }
@@ -263,10 +289,16 @@ export default function DetailProduct() {
                                   dispatch(setCart(res.data));
                                   navigate(`/cart/${user.id}`)
                                 });
+                              }).catch((err) => {
+                                Detail.getDetailProduct(id).then((response) => {
+                                  setDetail(response.data[0]);
+                                  setShowImg(response.data[0].Product.image);
+                                });
+                                ToastMessage.showToastWarnMessage(err.response.data);
                               })
                             }
                           } else {
-                            alert('Bạn cần đăng nhập để sử dụng')
+                            ToastMessage.showToastWarnMessage('Bạn cần đăng nhập để sử dụng')
                           }
                         }}
                         className={` cursor-pointer focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-red-500 font-medium rounded-lg text-lg px-5 py-2.5 mr-2 mb-2 w-6/12 focus:ring-1 `}>
@@ -332,6 +364,7 @@ export default function DetailProduct() {
               </div>
             </div>
           </div>
+          <ListByCategory2 category={'Cuộc sống'} />
           <ProductReview id={id} detail={detail} setDetail={setDetail} />
         </div>
       </div>

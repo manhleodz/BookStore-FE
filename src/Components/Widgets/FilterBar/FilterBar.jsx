@@ -51,7 +51,7 @@ export default function FilterBar({ flashSale, filteredData, setFilteredData }) 
 
   return (
     <>
-      <div className=' border-r-2 border-gray h-full w-full relative left-4'>
+      <div className=' h-full w-full relative pl-3 mt-10'>
         <div className={`p-1 w-full mt-5`} >
           <div className='flex justify-between items-center'>
             <div className=''>
@@ -66,7 +66,7 @@ export default function FilterBar({ flashSale, filteredData, setFilteredData }) 
           <div className=' flex flex-col divide-y'>
             <div>
               <h1 className=' text-2xl font-semibold'>Tác giả</h1>
-              <div className="flex items-center p-2 rounded hover:bg-gray-100 ">
+              <div className="flex items-center p-2 rounded hover:bg-gray-200 ">
                 <input
                   defaultChecked={selectedAuthor0 && selectedAuthor0.includes("Thích Nhất Hạnh")}
                   id="checkbox-item-1" onChange={(e) => {
@@ -83,9 +83,9 @@ export default function FilterBar({ flashSale, filteredData, setFilteredData }) 
                   type="checkbox" value=""
                   className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 "
                 />
-                <label htmlFor="checkbox-item-1" className="w-full ml-2 text-sm font-medium text-gray-900 rounded ">Thích Nhất Hạnh</label>
+                <label htmlFor="checkbox-item-1" className="w-full ml-2 text-sm font-medium text-gray-900 rounded cursor-pointer ">Thích Nhất Hạnh</label>
               </div>
-              <div className="flex items-center p-2 rounded hover:bg-gray-100 ">
+              <div className="flex items-center p-2 rounded hover:bg-gray-200 ">
                 <input
                   defaultChecked={selectedAuthor0 && selectedAuthor0.includes("Mạnh Leo")}
                   id="checkbox-item-2" onChange={(e) => {
@@ -100,9 +100,9 @@ export default function FilterBar({ flashSale, filteredData, setFilteredData }) 
                     }
                   }} type="checkbox" value="" className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 "
                 />
-                <label htmlFor="checkbox-item-2" className="w-full ml-2 text-sm font-medium text-gray-900 rounded ">Mạnh Leo</label>
+                <label htmlFor="checkbox-item-2" className="w-full ml-2 text-sm font-medium text-gray-900 rounded cursor-pointer ">Mạnh Leo</label>
               </div>
-              <div className="flex items-center p-2 rounded hover:bg-gray-100 ">
+              <div className="flex items-center p-2 rounded hover:bg-gray-200 ">
                 <input
                   defaultChecked={selectedAuthor0 && selectedAuthor0.includes("Bill Gates")}
                   id="checkbox-item-3" onChange={(e) => {
@@ -117,9 +117,9 @@ export default function FilterBar({ flashSale, filteredData, setFilteredData }) 
                     }
                   }} type="checkbox" value="" className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 "
                 />
-                <label htmlFor="checkbox-item-3" className="w-full ml-2 text-sm font-medium text-gray-900 rounded ">Bill Gates</label>
+                <label htmlFor="checkbox-item-3" className="w-full ml-2 text-sm font-medium text-gray-900 rounded cursor-pointer ">Bill Gates</label>
               </div>
-              <div className="flex items-center p-2 rounded hover:bg-gray-100 ">
+              <div className="flex items-center p-2 rounded hover:bg-gray-200 ">
                 <input
                   defaultChecked={selectedAuthor0 && selectedAuthor0.includes("Nguyễn Nhật Ánh")}
                   id="checkbox-item-4" onChange={(e) => {
@@ -133,9 +133,9 @@ export default function FilterBar({ flashSale, filteredData, setFilteredData }) 
                     }
                   }} type="checkbox" value="" className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 "
                 />
-                <label htmlFor="checkbox-item-4" className="w-full ml-2 text-sm font-medium text-gray-900 rounded ">Nguyễn Nhật Ánh</label>
+                <label htmlFor="checkbox-item-4" className="w-full ml-2 text-sm font-medium text-gray-900 rounded cursor-pointer ">Nguyễn Nhật Ánh</label>
               </div>
-              <div className="flex items-center p-2 rounded hover:bg-gray-100 ">
+              <div className="flex items-center p-2 rounded hover:bg-gray-200 ">
                 <input
                   defaultChecked={selectedAuthor0 && selectedAuthor0.includes("Đéo nghĩ ra ông nào")}
                   id="checkbox-item-5" onChange={(e) => {
@@ -149,12 +149,12 @@ export default function FilterBar({ flashSale, filteredData, setFilteredData }) 
                     }
                   }} type="checkbox" value="" className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 "
                 />
-                <label htmlFor="checkbox-item-5" className="w-full ml-2 text-sm font-medium text-gray-900 rounded ">Đéo nghĩ ra ông nào</label>
+                <label htmlFor="checkbox-item-5" className="w-full ml-2 text-sm font-medium text-gray-900 rounded cursor-pointer ">Đéo nghĩ ra ông nào</label>
               </div>
             </div>
             <div>
               <h1 className=' text-2xl font-semibold'>Thể Loại</h1>
-              <div className="flex items-center p-2 rounded hover:bg-gray-100 ">
+              <div className="flex items-center p-2 rounded hover:bg-gray-200 ">
                 <input
                   defaultChecked={selectedCategory0 && selectedCategory0.includes("Tình yêu")}
                   id="checkbox-item-6" onChange={(e) => {
@@ -168,9 +168,9 @@ export default function FilterBar({ flashSale, filteredData, setFilteredData }) 
                     }
                   }} type="checkbox" value="" className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 "
                 />
-                <label htmlFor="checkbox-item-6" className="w-full ml-2 text-sm font-medium text-gray-900 rounded ">Tình yêu</label>
+                <label htmlFor="checkbox-item-6" className="w-full ml-2 text-sm font-medium text-gray-900 rounded cursor-pointer ">Tình yêu</label>
               </div>
-              <div className="flex items-center p-2 rounded hover:bg-gray-100 ">
+              <div className="flex items-center p-2 rounded hover:bg-gray-200 ">
                 <input
                   defaultChecked={selectedCategory0 && selectedCategory0.includes("Phật giáo")}
                   id="checkbox-item-7" onChange={(e) => {
@@ -184,9 +184,9 @@ export default function FilterBar({ flashSale, filteredData, setFilteredData }) 
                     }
                   }} type="checkbox" value="" className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 "
                 />
-                <label htmlFor="checkbox-item-7" className="w-full ml-2 text-sm font-medium text-gray-900 rounded ">Phật giáo</label>
+                <label htmlFor="checkbox-item-7" className="w-full ml-2 text-sm font-medium text-gray-900 rounded cursor-pointer ">Phật giáo</label>
               </div>
-              <div className="flex items-center p-2 rounded hover:bg-gray-100 ">
+              <div className="flex items-center p-2 rounded hover:bg-gray-200 ">
                 <input
                   defaultChecked={selectedCategory0 && selectedCategory0.includes("Thiếu nhi")}
                   id="checkbox-item-8" onChange={(e) => {
@@ -200,9 +200,9 @@ export default function FilterBar({ flashSale, filteredData, setFilteredData }) 
                     }
                   }} type="checkbox" value="" className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 "
                 />
-                <label htmlFor="checkbox-item-8" className="w-full ml-2 text-sm font-medium text-gray-900 rounded ">Thiếu nhi</label>
+                <label htmlFor="checkbox-item-8" className="w-full ml-2 text-sm font-medium text-gray-900 rounded cursor-pointer ">Thiếu nhi</label>
               </div>
-              <div className="flex items-center p-2 rounded hover:bg-gray-100 ">
+              <div className="flex items-center p-2 rounded hover:bg-gray-200 ">
                 <input
                   defaultChecked={selectedCategory0 && selectedCategory0.includes("Trinh thám")}
                   id="checkbox-item-9" onChange={(e) => {
@@ -216,9 +216,9 @@ export default function FilterBar({ flashSale, filteredData, setFilteredData }) 
                     }
                   }} type="checkbox" value="" className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 "
                 />
-                <label htmlFor="checkbox-item-9" className="w-full ml-2 text-sm font-medium text-gray-900 rounded ">Trinh thám</label>
+                <label htmlFor="checkbox-item-9" className="w-full ml-2 text-sm font-medium text-gray-900 rounded cursor-pointer ">Trinh thám</label>
               </div>
-              <div className="flex items-center p-2 rounded hover:bg-gray-100 ">
+              <div className="flex items-center p-2 rounded hover:bg-gray-200 ">
                 <input
                   defaultChecked={selectedCategory0 && selectedCategory0.includes("Đời sống")}
                   id="checkbox-item-10" onChange={(e) => {
@@ -232,12 +232,12 @@ export default function FilterBar({ flashSale, filteredData, setFilteredData }) 
                     }
                   }} type="checkbox" value="" className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 "
                 />
-                <label htmlFor="checkbox-item-10" className="w-full ml-2 text-sm font-medium text-gray-900 rounded ">Đời sống</label>
+                <label htmlFor="checkbox-item-10" className="w-full ml-2 text-sm font-medium text-gray-900 rounded cursor-pointer ">Đời sống</label>
               </div>
             </div>
             <div>
               <h1 className=' text-2xl font-semibold'>Giá</h1>
-              <div className="flex items-center p-2 rounded hover:bg-gray-100 ">
+              <div className="flex items-center p-2 rounded hover:bg-gray-200 ">
                 <input
                   defaultChecked={selectedPrice0 && selectedPrice0.includes(`"lower":0`)}
                   id="checkbox-item-11" onChange={(e) => {
@@ -254,9 +254,9 @@ export default function FilterBar({ flashSale, filteredData, setFilteredData }) 
                     }
                   }} type="checkbox" value="" className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 "
                 />
-                <label htmlFor="checkbox-item-11" className="w-full ml-2 text-sm font-medium text-gray-900 rounded ">0 - 100.000vnđ</label>
+                <label htmlFor="checkbox-item-11" className="w-full ml-2 text-sm font-medium text-gray-900 rounded cursor-pointer ">0 - 100.000vnđ</label>
               </div>
-              <div className="flex items-center p-2 rounded hover:bg-gray-100 ">
+              <div className="flex items-center p-2 rounded hover:bg-gray-200 ">
                 <input
                   defaultChecked={selectedPrice0 && selectedPrice0.includes(`"lower":100000`)}
                   id="checkbox-item-12" onChange={(e) => {
@@ -273,9 +273,9 @@ export default function FilterBar({ flashSale, filteredData, setFilteredData }) 
                     }
                   }} type="checkbox" value="" className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 "
                 />
-                <label htmlFor="checkbox-item-12" className="w-full ml-2 text-sm font-medium text-gray-900 rounded ">100.000-200.000vnđ</label>
+                <label htmlFor="checkbox-item-12" className="w-full ml-2 text-sm font-medium text-gray-900 rounded cursor-pointer ">100.000-200.000vnđ</label>
               </div>
-              <div className="flex items-center p-2 rounded hover:bg-gray-100 ">
+              <div className="flex items-center p-2 rounded hover:bg-gray-200 ">
                 <input
                   defaultChecked={selectedPrice0 && selectedPrice0.includes(`"lower":200000`)}
                   id="checkbox-item-13" onChange={(e) => {
@@ -292,9 +292,9 @@ export default function FilterBar({ flashSale, filteredData, setFilteredData }) 
                     }
                   }} type="checkbox" value="" className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 "
                 />
-                <label htmlFor="checkbox-item-13" className="w-full ml-2 text-sm font-medium text-gray-900 rounded ">200.000-300.000vnđ</label>
+                <label htmlFor="checkbox-item-13" className="w-full ml-2 text-sm font-medium text-gray-900 rounded cursor-pointer ">200.000-300.000vnđ</label>
               </div>
-              <div className="flex items-center p-2 rounded hover:bg-gray-100 ">
+              <div className="flex items-center p-2 rounded hover:bg-gray-200 ">
                 <input
                   defaultChecked={selectedPrice0 && selectedPrice0.includes(`"lower":300000`)}
                   id="checkbox-item-14" onChange={(e) => {
@@ -311,9 +311,9 @@ export default function FilterBar({ flashSale, filteredData, setFilteredData }) 
                     }
                   }} type="checkbox" value="" className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 "
                 />
-                <label htmlFor="checkbox-item-14" className="w-full ml-2 text-sm font-medium text-gray-900 rounded ">300.000-400.000vnđ</label>
+                <label htmlFor="checkbox-item-14" className="w-full ml-2 text-sm font-medium text-gray-900 rounded cursor-pointer ">300.000-400.000vnđ</label>
               </div>
-              <div className="flex items-center p-2 rounded hover:bg-gray-100 ">
+              <div className="flex items-center p-2 rounded hover:bg-gray-200 ">
                 <input
                   defaultChecked={selectedPrice0 && selectedPrice0.includes(`"lower":400000`)}
                   id="checkbox-item-15" onChange={(e) => {
@@ -330,7 +330,7 @@ export default function FilterBar({ flashSale, filteredData, setFilteredData }) 
                     }
                   }} type="checkbox" value="" className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 "
                 />
-                <label htmlFor="checkbox-item-15" className="w-full ml-2 text-sm font-medium text-gray-900 rounded ">{">400.000vnđ"}</label>
+                <label htmlFor="checkbox-item-15" className="w-full ml-2 text-sm font-medium text-gray-900 rounded cursor-pointer ">{">400.000vnđ"}</label>
               </div>
             </div>
           </div>
@@ -365,7 +365,7 @@ export default function FilterBar({ flashSale, filteredData, setFilteredData }) 
               }
               setFilteredData(result);
             }}
-            className="text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 font-medium rounded-lg w-full text-sm px-5 py-2.5 mr-2 mb-2 "
+            className="text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-200 focus:ring-4 focus:ring-gray-200 font-medium rounded-lg w-full text-sm px-5 py-2.5 mr-2 mb-2 "
           >
             Áp dụng
           </button>

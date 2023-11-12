@@ -15,6 +15,7 @@ export default function Chat({ user, socket, open, setOpen }) {
     const sendMessage = async () => {
         if (currentMessage !== "") {
             const messageData = {
+                author: user.username,
                 receiver: 0,
                 message: currentMessage,
                 room: user.id,
@@ -44,10 +45,9 @@ export default function Chat({ user, socket, open, setOpen }) {
                 setMessageList(res.data);
             });
         }
-    }, []);
+    }, [open]);
 
     if (!messageList) return null;
-    console.log(messageList);
 
     return (
         <>
@@ -81,10 +81,10 @@ export default function Chat({ user, socket, open, setOpen }) {
                                 return (
                                     <div
                                         className="message"
-                                        id={user.id === Number(messageContent.author) ? "you" : "shop"}
+                                        id={user.id === Number(messageContent.room) ? "you" : "shop"}
                                         key={index}
                                     >
-                                        {user.id !== Number(messageContent.author) ? (
+                                        {user.id !== Number(messageContent.room) ? (
                                             <div className='w-full'>
                                                 <div className="message-content">
                                                     <p>{messageContent.message}</p>
@@ -102,7 +102,7 @@ export default function Chat({ user, socket, open, setOpen }) {
                                                     </div>
                                                     <div className="message-meta flex">
                                                         <p id="time">{messageContent.time}</p>
-                                                        <p id="author">{messageContent.UserId}</p>
+                                                        <p id="author">{messageContent.author}</p>
                                                     </div>
                                                 </div>
                                                 <img src={user.avatar} alt='...' className='w-10 h-10 rounded-full' />

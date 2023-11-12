@@ -14,7 +14,7 @@ import { storage } from '../../../Firebase/StorageFireBase';
 import { v4 } from "uuid";
 import { setUser } from '../../../Redux/AuthenticationSlice';
 import { useTranslation } from 'react-i18next';
-
+import Generate from '../../../Helper/Generate';
 
 export default function Info() {
 
@@ -24,7 +24,7 @@ export default function Info() {
   const [changeUsername, setChangeUsername] = useState(true);
   const [changePhone, setChangePhone] = useState(true);
   const [changeEmail, setChangeEmail] = useState(true);
-  const [OTP, setOTP] = useState(Math.floor(Math.random() * 1000000));
+  const [OTP, setOTP] = useState(Generate(6));
   const [inputOTP, setInputOTP] = useState("");
   const [username, setUsername] = useState();
   const [address, setAddress] = useState();
@@ -91,7 +91,7 @@ export default function Info() {
   const showToastInfoMessage = (title) => {
     toast.info(title, {
       position: "top-right",
-      autoClose: 5000,
+      autoClose: 1000,
       hideProgressBar: false,
       closeOnClick: true,
       pauseOnHover: true,
@@ -102,8 +102,8 @@ export default function Info() {
   };
 
   const timer = setTimeout(() => {
-    setOTP(Math.floor(Math.random() * 1000000));
-  }, 64000);
+    setOTP(Generate(6));
+  }, 128000);
 
   if (!user) return null;
 
@@ -206,12 +206,13 @@ export default function Info() {
                         type='text' onChange={(e) => {
                           setInputOTP(e.target.value);
                         }}
-                        value={inputOTP} placeholder='Nhập mã xác nhận' className=' border-none active:ring-0 focus:ring-0 active:border-0 w-9/12'
+                        value={inputOTP} placeholder='Nhập mã xác nhận' className=' border-none active:ring-0 pl-1 py-2 outline-none focus:ring-0 active:border-0 w-9/12'
                       />
                       <h1
                         className='text-sm text-blue-500 cursor-pointer text-right'
                         onClick={() => {
-                          showToastInfoMessage("Kiểm tra email nhé! Code có hiệu quả trong 1 phút");
+                          setTimeout(timer);
+                          showToastInfoMessage("Kiểm tra email nhé! Code có hiệu quả trong 2 phút");
                           Authentication.getCode({
                             email: user.email,
                             username: user.username,
@@ -229,14 +230,13 @@ export default function Info() {
                           }).catch((err) => {
                             toastMessage.showToastWarnMessage(err);
                           });
-                          setTimeout(timer);
                         }}
                       >
-                        Gửi mã OTP
+                        Gửi OTP
                       </h1>
                       <ToastContainer
                         position="top-right"
-                        autoClose={5000}
+                        autoClose={1000}
                         hideProgressBar={false}
                         newestOnTop={false}
                         closeOnClick
@@ -252,15 +252,10 @@ export default function Info() {
               </div>
               <div className=' w-9/12 flex flex-col justify-center items-center'>
                 <button
-                  className=' p-2 bg-gray-400 text-black rounded-md w-9/12 my-2'
+                  className=' p-2 bg-red-600 text-white font-semibold rounded-md w-9/12 my-2'
                   onClick={() => {
                     if (inputOTP === String(OTP)) {
                       uploadFile();
-                      const timer = setTimeout(() => {
-                        // document.getElementById('otp').style.display = 'none';
-                        setInputOTP("");
-                      }, 10000);
-                      return () => clearTimeout(timer);
                     } else {
                       toastMessage.showToastWarnMessage("Kiểm tra lại mã nhé")
                     }
@@ -269,7 +264,7 @@ export default function Info() {
                   {t('confirm')}
                 </button>
                 <button
-                  className=' p-2 bg-white border-2 border-red-600 text-red-600 rounded-md w-9/12 my-2 mb-10'
+                  className=' p-2 bg-white border-2 border-red-600 text-red-600 font-semibold rounded-md w-9/12 my-2 mb-10'
                   onClick={() => {
                     document.getElementById("otp").style.display = "none";
                   }}
@@ -287,19 +282,38 @@ export default function Info() {
               type='file' id='upload' className=' absolute -z-10' hidden
               onChange={(e) => {
                 const file = (e.target.files[0]);
-                setImageUpload(file);
-                file.preview = URL.createObjectURL(file);
-                setBeforeUpload(file);
+                if (file.type === 'image/png' || file.type === 'image/jpeg') {
+                  setImageUpload(file);
+                  file.preview = URL.createObjectURL(file);
+                  setBeforeUpload(file);
+                } else {
+                  toastMessage.showToastWarnMessage('Chọn file hình ảnh!');
+                }
               }}
             />
-            <label htmlFor="upload" className='label_info'>{t('chooseImg')}</label>
+            {!beforeUpload ? (
+              <>
+                <label htmlFor="upload" className='bg-blue-400 p-1 rounded-lg text-white font-semibold px-3 cursor-pointer hover:bg-blue-500'>{t('chooseImg')}</label>
+              </>
+            ) : (
+              <>
+                <div
+                  onClick={() => {
+                    setImageUpload(null);
+                    setBeforeUpload(null);
+                  }}
+                  className=' bg-gray-400 p-1 rounded-lg text-white font-semibold px-3 cursor-pointer hover:bg-gray-500'
+                >
+                  Gỡ ảnh
+                </div>
+              </>
+            )}
           </div>
         </div>
       </div>
       <div className=' w-full flex justify-center items-center'>
         <button
           onClick={() => {
-            console.log(OTP);
             if (username || address || email || phonenumber || beforeUpload) {
 
               if (!address) {
@@ -324,6 +338,7 @@ export default function Info() {
           {t('save')}
         </button>
       </div>
+      <ToastContainer autoClose={1000}/>
     </div>
   )
 }

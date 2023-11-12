@@ -17,5 +17,9 @@ export const Product = {
 
     async updateProduct(id, data) {
         return axios.put(`${getApiUrl}/products/product/${id}`, data);
+    },
+
+    async GetByCategory(category) { 
+        return axios.get(`${getApiUrl}/products/by/${category}`);
     }
 }
