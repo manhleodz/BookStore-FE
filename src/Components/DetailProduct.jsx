@@ -364,7 +364,7 @@ export default function DetailProduct() {
               </div>
             </div>
           </div>
-          <ListByCategory2 category={'Cuộc sống'} />
+          <ListByCategory2 category={detail.category} />
           <ProductReview id={id} detail={detail} setDetail={setDetail} />
         </div>
       </div>
