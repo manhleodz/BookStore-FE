@@ -20,7 +20,6 @@ export default function ListByCategory({ category }) {
         </div>
     )
 
-    console.log(list);
     return (
         <div className='w-full flex flex-col justify-center items-center mt-7'>
             <div className='w-9/12 mt-8 flex flex-col justify-center items-center shadow-xl bg-white rounded-lg relative z-10'>

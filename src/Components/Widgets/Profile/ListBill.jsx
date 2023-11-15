@@ -15,6 +15,7 @@ export default function ListBill({ bill, bills, getBill }) {
 
     if (!cart) return null;
 
+    console.log(bill);
     return (
         <div
             className=' flex items-start justify-between my-5'

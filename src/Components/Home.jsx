@@ -35,7 +35,6 @@ export default function Home() {
     document.title = "Hung Store";
 
 
-    // return () => clearTimeout(timer);
   }, []);
 
   if (!flashSale) return null;

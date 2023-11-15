@@ -23,7 +23,7 @@ export default function Cart() {
     const [afterCoupon, setAfterCoupon] = useState(0);
     const [loading, setLoading] = useState(true);
     const [couponId, setCouponId] = useState(null);
-    var total = 0;  
+    var total = 0;
 
     useEffect(() => {
 

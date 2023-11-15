@@ -6,7 +6,6 @@ import OtpInput from "otp-input-react";
 import { useNavigate } from 'react-router-dom';
 import { Bill } from '../../../Network/Bill';
 import ToastMessage from '../ToastMessage';
-import { toast } from 'react-toastify';
 
 export default function VerifyBill({ phone, getPhone, bill, name, address, note }) {
 
@@ -37,7 +36,6 @@ export default function VerifyBill({ phone, getPhone, bill, name, address, note 
             return;
 
         final.confirm(otp).then(() => {
-            ToastMessage.showToastSuccessMessage("Xác nhận thành công");
             Bill.updateBill({
                 receiver: name,
                 phone: phone,
@@ -45,7 +43,11 @@ export default function VerifyBill({ phone, getPhone, bill, name, address, note 
                 note: note,
                 status: 'đã xử lý'
             }, bill.id).then((res) => {
-                navigate('/');
+                ToastMessage.showToastSuccessMessage("Xác nhận thành công");
+                const timer = setTimeout(() => {
+                    navigate('/');
+                }, 2000);
+                clearTimeout(timer);
             }).catch((err) => {
                 console.log(err);
             });
