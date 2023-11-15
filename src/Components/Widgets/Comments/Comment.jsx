@@ -11,7 +11,40 @@ export default function Comment({ comment, setComments, listCmt, user, detail, s
 
   const owner = useSelector(state => state.authentication.user);
   const { t } = useTranslation();
-  const [edit, setEdit] = useState(false);
+  const [edit, setEdit] = useState(true);
+  const [options, setOptions] = useState(false);
+  const [newComment, setNewComment] = useState('');
+
+  const UpdateComment = (e) => {
+    e.preventDefault();
+    CommentApi.editComment(comment.id, {
+      commentBody: newComment
+    }).then(() => {
+      CommentApi.getCommentsByProductId(comment.ProductId).then(res => {
+        setComments(res.data.reverse());
+      }).catch(err => console.log(err))
+    })
+    setNewComment('');
+  }
+
+  const deleteComment = () => {
+    CommentApi.deleteComment(comment.id)
+      .then(() => {
+        const newList = listCmt.filter(comment1 => comment1.id !== comment.id)
+        setComments(newList);
+      })
+      .then(() => {
+        Detail.updatedDetailProduct({
+          ratingstars: updateStar(comment.rating)
+        }, comment.ProductId).then(() => {
+          Detail.getDetailProduct(detail.id).then((response) => {
+            setDetail(response.data[0]);
+          });
+        }).catch(err => {
+          console.error(err);
+        });
+      }).catch(err => console.error(err));
+  }
 
   function rank(star) {
     if (star === 0) {
@@ -39,7 +72,6 @@ export default function Comment({ comment, setComments, listCmt, user, detail, s
     return (star - rating) / (listCmt.length - 1);
   }
 
-
   return (
     <div className=' w-full space-x-5 my-4 flex justify-start '>
       <div className='w-3/12 max-xl:w-4/12'>
@@ -58,42 +90,66 @@ export default function Comment({ comment, setComments, listCmt, user, detail, s
             <Rating name="read-only" value={Number(comment.rating)} readOnly />
             <h1 className=' font-semibold'>{rank(comment.rating)}</h1>
           </div>
-          <input className=' break-words w-full bg-white' value={comment.commentBody} disabled={!edit} style={{ minHeight: '10px' }}></input>
+          {edit ? (
+            <div className={` break-words w-full bg-white`} style={{ minHeight: '10px' }}>{comment.commentBody}</div>
+          ) : (
+            <form
+              action={UpdateComment}
+              onClick={(e) => {
+                setEdit(true);
+              }}
+              className=' w-full h-full'
+            >
+              <textarea
+                className=' w-full border bg-gray-100 rounded-md focus:outline focus:outline-blue-300'
+                autoFocus={true}
+                defaultValue={comment.commentBody}
+                onChange={(e) => setNewComment(e.target.value)}
+              >
+              </textarea>
+              <div className='w-full flex justify-end h-full relative z-0'>
+                <button onClick={UpdateComment} className=' p-2 bg-blue-400 text-white rounded-md hover:bg-blue-600 active:ring active:ring-blue-300'>
+                  Chỉnh sửa
+                </button>
+              </div>
+            </form>
+          )}
         </div>
         {user !== null && owner && user.id === owner.id && (
           <>
+            {options ? (
+              <div className='w-3/12 bg-gray-200 rounded-md p-1 divide-y divide-gray-500'>
+                <div
+                  className='cursor-pointer flex items-center hover:bg-gray-300 p-1.5 font-medium'
+                  onClick={() => {
+                    setEdit(false)
+                    setOptions(false)
+                  }}
+                >
+                  <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 576 512" className=' px-2'>
+                    <path d="M413.5 237.5c-28.2 4.8-58.2-3.6-80-25.4l-38.1-38.1C280.4 159 272 138.8 272 117.6V105.5L192.3 62c-5.3-2.9-8.6-8.6-8.3-14.7s3.9-11.5 9.5-14l47.2-21C259.1 4.2 279 0 299.2 0h18.1c36.7 0 72 14 98.7 39.1l44.6 42c24.2 22.8 33.2 55.7 26.6 86L503 183l8-8c9.4-9.4 24.6-9.4 33.9 0l24 24c9.4 9.4 9.4 24.6 0 33.9l-88 88c-9.4 9.4-24.6 9.4-33.9 0l-24-24c-9.4-9.4-9.4-24.6 0-33.9l8-8-17.5-17.5zM27.4 377.1L260.9 182.6c3.5 4.9 7.5 9.6 11.8 14l38.1 38.1c6 6 12.4 11.2 19.2 15.7L134.9 484.6c-14.5 17.4-36 27.4-58.6 27.4C34.1 512 0 477.8 0 435.7c0-22.6 10.1-44.1 27.4-58.6z" />
+                  </svg>
+                  Chỉnh sửa
+                </div>
+                <div
+                  className='cursor-pointer flex items-center hover:bg-gray-300 p-1.5 font-medium'
+                  onClick={deleteComment}
+                >
+                  <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 448 512" className=' px-2'>
+                    <path d="M170.5 51.6L151.5 80h145l-19-28.4c-1.5-2.2-4-3.6-6.7-3.6H177.1c-2.7 0-5.2 1.3-6.7 3.6zm147-26.6L354.2 80H368h48 8c13.3 0 24 10.7 24 24s-10.7 24-24 24h-8V432c0 44.2-35.8 80-80 80H112c-44.2 0-80-35.8-80-80V128H24c-13.3 0-24-10.7-24-24S10.7 80 24 80h8H80 93.8l36.7-55.1C140.9 9.4 158.4 0 177.1 0h93.7c18.7 0 36.2 9.4 46.6 24.9zM80 128V432c0 17.7 14.3 32 32 32H336c17.7 0 32-14.3 32-32V128H80zm80 64V400c0 8.8-7.2 16-16 16s-16-7.2-16-16V192c0-8.8 7.2-16 16-16s16 7.2 16 16zm80 0V400c0 8.8-7.2 16-16 16s-16-7.2-16-16V192c0-8.8 7.2-16 16-16s16 7.2 16 16zm80 0V400c0 8.8-7.2 16-16 16s-16-7.2-16-16V192c0-8.8 7.2-16 16-16s16 7.2 16 16z" />
+                  </svg>
+                  {t('delete')}
+                </div>
+              </div>
+            ) : (
+              <div></div>
+            )}
             <button onClick={() => {
-              document.getElementsByClassName('options').style.display = 'none';
+              setOptions(!options);
             }}
               className=' flex justify-center items-center cursor-pointer rounded-full bg-gray-200 p-2'>
-              <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 448 512"><path d="M8 256a56 56 0 1 1 112 0A56 56 0 1 1 8 256zm160 0a56 56 0 1 1 112 0 56 56 0 1 1 -112 0zm216-56a56 56 0 1 1 0 112 56 56 0 1 1 0-112z" /></svg>
+              <svg xmlns="http://www.w3.org/2000/svg" height="0.9em" viewBox="0 0 448 512"><path d="M8 256a56 56 0 1 1 112 0A56 56 0 1 1 8 256zm160 0a56 56 0 1 1 112 0 56 56 0 1 1 -112 0zm216-56a56 56 0 1 1 0 112 56 56 0 1 1 0-112z" /></svg>
             </button>
-            <div className='options w-1/6'>
-              <div>Chỉnh sửa</div>
-              <div
-                onClick={(e) => {
-                  CommentApi.deleteComment(comment.id)
-                    .then(() => {
-                      const newList = listCmt.filter(comment1 => comment1.id !== comment.id)
-                      setComments(newList);
-                    })
-                    .then(res => {
-                      Detail.updatedDetailProduct({
-                        ratingstars: updateStar(comment.rating)
-                      }, comment.ProductId).then(() => {
-                        Detail.getDetailProduct(detail.id).then((response) => {
-                          setDetail(response.data[0]);
-                        });
-                      }).catch(err => {
-                        console.error(err);
-                      });
-                    }).catch(err => console.error(err));
-                }}
-                className=' cursor-pointer'
-              >
-                {t('delete')}
-              </div>
-            </div>
           </>
         )}
       </div>

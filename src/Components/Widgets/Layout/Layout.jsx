@@ -48,7 +48,6 @@ export default function Layout({ children }) {
           <main className=' h-full w-screen bg-gray-200'>{children}</main>
         </div>
 
-
         <div className='fixed z-50 bottom-5 right-5 rounded-2xl shadow-2xl' id='box-chat'>
           <Chat user={user} socket={socket} open={open} setOpen={setOpen} />
           {!open && (<img

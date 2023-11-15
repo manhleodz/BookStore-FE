@@ -15,5 +15,13 @@ export const Detail = {
                 accessToken: localStorage.getItem('accessToken'),
             }
         });
+    },
+
+    async updateRatingDetail(id) {
+        return axios.put(`${getApiUrl}/detail/rating/${id}`, 1, {
+            headers: {
+                accessToken: localStorage.getItem('accessToken'),
+            }
+        });
     }
 }

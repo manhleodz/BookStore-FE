@@ -41,7 +41,7 @@ export default function DetailProduct() {
 
     const timer = setTimeout(() => {
       setLoading(false);
-    }, 1000);
+    }, 100);
     return () => clearTimeout(timer);
 
   }, [id, dispatch]);
@@ -73,19 +73,20 @@ export default function DetailProduct() {
                 <div className='flex w-full'>
                   <div className=' w-1/6'>
                     {(<button
-                      className=' text-xl w-full text-center bg-gray-200'
+                      className=' text-xl w-full text-center bg-gray-200 flex items-center justify-center hover:bg-gray-300 '
                       onClick={() => {
                         document.getElementById('container').scrollTop -= 200;
-                        console.log(document.getElementById('container').scrollTop);
                       }}
-                    >
-                      Up
+                    > 
+                      <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 512 512" className=' active:scale-110 px-16'>
+                        <path d="M233.4 105.4c12.5-12.5 32.8-12.5 45.3 0l192 192c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L256 173.3 86.6 342.6c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3l192-192z" />
+                      </svg>
                     </button>)}
                     <div className='w-full overflow-x-hidden overflow-y-hidden' style={{ height: '500px' }} id='container' >
                       <div className='space-y-2 w-full' id='images' style={{ maxHeight: `${(detail.ImageProducts.length + 1) * 100}px` }}>
                         <div
                           key={id}
-                          className='focus:outline-none w-11/12 cursor-pointer focus:ring-4 focus:ring-red-300'
+                          className='focus:outline-none w-full cursor-pointer focus:ring-4 focus:ring-red-300 flex justify-center items-center'
                           onClick={() => {
                             setShowImg(detail.Product.image);
                           }}
@@ -93,11 +94,11 @@ export default function DetailProduct() {
                           <img alt='...' src={`${detail.Product.image}`} className='max-h-40' />
                         </div>
                         {images !== null && (
-                          <div className=' overflow-auto'>
+                          <div className=' overflow-auto flex flex-col items-center justify-center'>
                             {images.map((image, id) => (
                               <div
                                 key={id}
-                                className='focus:outline-none w-11/12 my-1 cursor-pointer focus:ring-4 focus:ring-red-300'
+                                className='focus:outline-none w-11/12 my-1 cursor-pointer focus:ring-4 focus:ring-red-300 flex items-center justify-center'
                                 onClick={() => {
                                   setShowImg(image.path);
                                 }}
@@ -110,12 +111,13 @@ export default function DetailProduct() {
                       </div>
                     </div>
                     <button
-                      className=' text-xl w-full text-center bg-gray-200'
+                      className=' text-xl w-full text-center bg-gray-200 flex items-center justify-center hover:bg-gray-300  '
                       onClick={() => {
                         document.getElementById('container').scrollTop += 200;
-                        console.log(document.getElementById('container').scrollTop);
                       }}
-                    >Down
+                    >
+                      <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 512 512" className=' active:scale-110 px-16'>
+                        <path d="M233.4 406.6c12.5 12.5 32.8 12.5 45.3 0l192-192c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L256 338.7 86.6 169.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l192 192z" /></svg>
                     </button>
                   </div>
                   <div className='flex items-center justify-center h-auto w-full'>

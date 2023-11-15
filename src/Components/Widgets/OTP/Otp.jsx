@@ -29,7 +29,7 @@ export default function Otp({ username, email, signUp }) {
                                     type='text' onChange={(e) => {
                                         setInputOTP(e.target.value);
                                     }}
-                                    value={inputOTP} placeholder='Nhập mã xác nhận' className=' border-none active:ring-0 focus:ring-0 active:border-0 w-9/12'
+                                    value={inputOTP} placeholder='Nhập mã xác nhận' className=' border-none active:ring-0 outline-none focus:ring-0 active:border-0 w-9/12'
                                 />
                                 <h1
                                     className='text-sm text-blue-500 cursor-pointer text-right'

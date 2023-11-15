@@ -14,22 +14,12 @@ function Login() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [excuting, setExcuting] = useState(false);
-  const [alert, setAlert] = useState(null);
+  const [alert, setAlert] = useState();
 
   const onSubmit = (e) => {
     e.preventDefault();
-    setExcuting(true);
-    setAlert(null);
-    var pattern1 = new RegExp("^[A-Za-z][A-Za-z0-9_]{6,29}$");
-    if (!pattern1.test(username)) {
-      setExcuting(false);
-      setAlert("Tên người dùng gồm ít nhất 6 chữ cái")
-    } else if (password.length < 8) {
-      setExcuting(false);
-      setAlert("Mật khẩu phải nhiều hơn 7 kí tự");
-    }
 
-    if (excuting) {
+    if (!alert) {
       Authentication.login(
         {
           username: username,
@@ -90,7 +80,14 @@ function Login() {
                           placeholder="Username"
                           onChange={(event) => {
                             setUsername(event.target.value);
+                            if (event.target.value.length < 6) {
+                              setExcuting(false);
+                              setAlert("Tên người dùng gồm ít nhất 6 chữ cái")
+                            } else {
+                              setAlert();
+                            }
                           }}
+                          value={username}
                           autoCorrect="false"
                           required={true}
                         />
@@ -106,7 +103,15 @@ function Login() {
                           placeholder="Password"
                           onChange={(event) => {
                             setPassword(event.target.value);
+                            if (event.target.value.length < 7) {
+                              setExcuting(false);
+                              setAlert("Mật khẩu phải nhiều hơn 7 kí tự");
+                            } else {
+                              setAlert();
+                            }
                           }}
+                          defaultValue={password}
+                          value={password}
                           autoCorrect="false"
                           required={true}
                         />

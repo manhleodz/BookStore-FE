@@ -66,7 +66,7 @@ export default function ProductReview({ id, detail, setDetail }) {
 
         setRating(0);
         Detail.updatedDetailProduct({
-          ratingstars: Math.round(updateAddStar(rating) * 10) / 10
+          ratingstars: Math.floor(updateAddStar(rating) * 10) / 10
         }, id).then(() => {
           Detail.getDetailProduct(id).then((response) => {
             setDetail(response.data[0]);
@@ -142,7 +142,6 @@ export default function ProductReview({ id, detail, setDetail }) {
                     </label>
                   </div>
                   <div className="flex items-center justify-between px-3 py-2 border-t ">
-
                     <Rating
                       name="hover-feedback"
                       value={rating}

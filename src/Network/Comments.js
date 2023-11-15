@@ -9,7 +9,7 @@ export const CommentApi = {
     },
 
     async getCommentsByUser() {
-        return axios.get(`${getApiUrl}/comments/user` , {
+        return axios.get(`${getApiUrl}/comments/user`, {
             headers: {
                 accessToken: localStorage.getItem("accessToken"),
             }
@@ -32,7 +32,11 @@ export const CommentApi = {
         });
     },
 
-    async editComment(id) {
-        
+    async editComment(id, data) {
+        return axios.put(`${getApiUrl}/comments/${id}`, data, {
+            headers: {
+                accessToken: localStorage.getItem("accessToken"),
+            }
+        })
     }
 }

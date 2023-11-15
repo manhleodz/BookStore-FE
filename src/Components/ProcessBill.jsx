@@ -9,6 +9,7 @@ import PhoneInput from 'react-phone-input-2'
 import 'react-phone-input-2/lib/style.css'
 import OtpInput from "otp-input-react";
 import toast from './Widgets/ToastMessage';
+import VerifyBill from './Widgets/OTP/VerifyBill';
 
 export default function ProcessBill() {
 
@@ -20,9 +21,6 @@ export default function ProcessBill() {
   const [address, getAddress] = useState();
   const [note, getNotes] = useState();
   const [alert, getAlert] = useState();
-  const [otp, setotp] = useState('');
-  const [show, setshow] = useState(false);
-  const [final, setfinal] = useState('');
   const user = useSelector(state => state.authentication.user);
   const navigate = useNavigate();
 
@@ -52,46 +50,6 @@ export default function ProcessBill() {
     }
   }
 
-  // Sent OTP
-  const signin = () => {
-
-    if (phone === "" || phone < 10) return;
-
-    let verify = new firebase.auth.RecaptchaVerifier('recaptcha-container');
-    firebase.auth().signInWithPhoneNumber(`+${phone}`, verify).then((result) => {
-      setfinal(result);
-      setshow(true);
-    })
-      .catch((err) => {
-        console.log(err);
-      });
-  }
-
-  // Validate OTP
-  const ValidateOtp = () => {
-    if (otp === null || final === null)
-      return;
-
-    final.confirm(otp).then(() => {
-      toast.showToastSuccessMessage("Xác nhận thành công");
-      Bill.updateBill({
-        receiver: name,
-        phone: phone,
-        address: address,
-        note: note,
-        status: 'đã xử lý'
-      }, bill.id).then((res) => {
-        navigate('/');
-      }).catch((err) => {
-        console.log(err);
-      });
-    }).catch((res) => {
-      if (res.message === "Firebase: The SMS code has expired. Please re-send the verification code to try again. (auth/code-expired).") {
-        alert("Mã hết hạn");
-      }
-    })
-  }
-
   useEffect(() => {
 
     Bill.getBillById(billId).then(res => {
@@ -109,6 +67,9 @@ export default function ProcessBill() {
       <div className=' relative top-52'>
         <div className=' flex flex-col items-center justify-center space-y-5 bg-gray-200'>
           <div className=' w-10/12 shadow-sm bg-white p-5 divide-y-2 divide-gray-200'>
+            {bill.status === 'đang xử lý' && (
+              <h1 className=' text-xl text-red-600 underline'>*Lưu ý: Các đơn hàng chưa xác thực sẽ bị xóa sau 3 ngày</h1>
+            )}
             <h1 className=' text-xl font-semibold'>Địa chỉ giao hàng</h1>
             <div>
               <div className=' max-w-3xl'>
@@ -282,37 +243,7 @@ export default function ProcessBill() {
               }
             }}
           >
-            <div
-              id='form'
-              className=' fixed z-50 w-screen h-screen flex top-0 justify-center items-center'
-              style={{ backgroundColor: 'rgb(0,0,0,0.4)' }}
-            >
-              <center className=' bg-white p-5 rounded-lg  w-3/12 h-2/6 flex flex-col justify-around items-center'>
-                <h1 className=' text-2xl font-semibold'>Xác nhận số điện thoại</h1>
-                <div style={{ display: !show ? "block" : "none" }}>
-                  <PhoneInput
-                    country={'vn'}
-                    value={phone}
-                    disabled
-                  />
-                  <div id="recaptcha-container"></div>
-                  <button className=' p-2 bg-green-500 text-white text-lg font-semibold rounded-md mt-3' onClick={signin}>Gửi mã OTP</button>
-                </div>
-                <div style={{ display: show ? "block" : "none" }}>
-                  <OtpInput
-                    value={otp}
-                    onChange={setotp}
-                    OTPLength={6}
-                    otpType="number"
-                    disabled={false}
-                    autoFocus
-                    className=" p-2 bg-gray-300"
-                  ></OtpInput>
-                  <br /><br />
-                  <button className=' p-2 bg-green-400 text-white text-xl rounded-lg' onClick={ValidateOtp}>Xác nhận</button>
-                </div>
-              </center>
-            </div>
+            <VerifyBill phone={phone} getPhone={getPhone} bill={bill} name={name} address={address} note={note} />
           </div>
 
           <div className='h-32'></div>
@@ -362,7 +293,7 @@ export default function ProcessBill() {
 
                   onClick={submit}
                   type="button"
-                  className="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-xl px-5 py-2.5 mr-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900"
+                  className="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-2 focus:ring-red-300 font-medium rounded-lg text-xl px-5 py-2.5 "
                 >
                   Xác nhận thanh toán
                 </button>

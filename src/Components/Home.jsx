@@ -14,7 +14,7 @@ export default function Home() {
 
   const timer = setTimeout(() => {
     setLoading(false);
-  }, 1000);
+  }, 100);
 
   function shuffleArray(array) {
     let result = [...array];

@@ -33,12 +33,12 @@ export default function ListBook({ flashSale }) {
               </svg>
             </button>
             <div
-              className={` w-full max-xl:absolute max-xl:w-5/12 max-xl:bg-gray-100 z-10 duration-1000 -translate-w-full transition ${!openFilter && ' max-xl:hidden'}`}
+              className={` w-full max-xl:absolute max-xl:w-5/12 max-xl:bg-gray-100 h-full z-10 duration-1000 -translate-w-full transition ${!openFilter && ' max-xl:hidden'}`}
             >
               <FilterBar flashSale={flashSale} filteredData={filteredData} setFilteredData={setFilteredData} />
             </div>
           </div>
-          <div className=' w-full flex flex-col justify-start max-xl:justify-center'>
+          <div className=' w-10/12 flex flex-col justify-start max-xl:w-full max-xl:justify-center'>
             <div className=' absolute right-5 top-2'>
               <h1 className=' text-lg font-semibold'>Sắp xếp theo</h1>
               <button
