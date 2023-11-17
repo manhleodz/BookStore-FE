@@ -115,7 +115,7 @@ export default function Info() {
           <div className=' flex items-center justify-between'>
             <h1>{t('username')}:</h1>
             <div
-              className=' bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 flex justify-between w-8/12 m-2 pl-3 p-2.5  '
+              className={` ${!changeUsername ? 'shadow-lg shadow-blue-200 ' : ''} bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 flex justify-between w-8/12 m-2 pl-3 p-2.5  `}
             >
               <input
                 id='username'
@@ -130,11 +130,11 @@ export default function Info() {
           <div className=' flex items-center justify-between'>
             <h1>{t('address')}:</h1>
             <div
-              className=' bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 flex justify-between w-8/12 m-2 pl-3 p-2.5  '
+              className={` bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 flex justify-between w-8/12 m-2 pl-3 p-2.5  ${!changeAddress ? 'shadow-lg shadow-blue-200 ' : ''}`}
             >
               <input
                 id='address'
-                className={`bg-gray-50 outline-none border-none w-10/12 ${changeAddress ? 'text-gray-400 cursor-default' : ''}`}
+                className={`bg-gray-50 outline-none border-none w-10/12 ${changeAddress ? 'text-gray-400 cursor-default ' : ''}`}
                 defaultValue={user.address}
                 readOnly={changeAddress}
                 onChange={(e) => setAddress(e.target.value)}
@@ -152,7 +152,7 @@ export default function Info() {
           <div className=' flex items-center justify-between'>
             <h1>{t('phonenumber')}:</h1>
             <div
-              className=' bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 flex justify-between w-8/12 m-2 pl-3 p-2.5  '
+              className={`${!changePhone ? 'shadow-lg shadow-blue-200 ' : ''} bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 flex justify-between w-8/12 m-2 pl-3 p-2.5  `}
             >
               <input
                 id='phone'
@@ -167,7 +167,7 @@ export default function Info() {
           <div className=' flex items-center justify-between'>
             <h1>Email:</h1>
             <div
-              className=' bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 flex justify-between w-8/12 m-2 pl-3 p-2.5  '
+              className={`${!changeEmail ? 'shadow-lg shadow-blue-200 ' : ''} bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 flex justify-between w-8/12 m-2 pl-3 p-2.5  `}
             >
               <input
                 id='address'
