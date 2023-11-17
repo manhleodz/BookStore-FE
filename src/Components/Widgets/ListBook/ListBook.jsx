@@ -67,7 +67,7 @@ export default function ListBook({ flashSale }) {
                       let data = [...flashSale];
                       for (var i = 0; i < data.length; i++) {
                         for (var j = 0; j < (data.length - i - 1); j++) {
-                          if (data[j].product.id > data[j + 1].product.id) {
+                          if (data[j].id > data[j + 1].id) {
                             var temp = data[j];
                             data[j] = data[j + 1];
                             data[j + 1] = temp;
@@ -86,7 +86,7 @@ export default function ListBook({ flashSale }) {
                       let data = [...flashSale];
                       for (var i = 0; i < data.length; i++) {
                         for (var j = 0; j < (data.length - i - 1); j++) {
-                          if (data[j].product.price < data[j + 1].product.price) {
+                          if (data[j].price < data[j + 1].price) {
                             var temp = data[j];
                             data[j] = data[j + 1];
                             data[j + 1] = temp;
@@ -105,7 +105,7 @@ export default function ListBook({ flashSale }) {
                       let data = [...flashSale];
                       for (var i = 0; i < data.length; i++) {
                         for (var j = 0; j < (data.length - i - 1); j++) {
-                          if (data[j].product.price > data[j + 1].product.price) {
+                          if (data[j].price > data[j + 1].price) {
                             var temp = data[j];
                             data[j] = data[j + 1];
                             data[j + 1] = temp;
@@ -124,7 +124,7 @@ export default function ListBook({ flashSale }) {
                       let data = [...flashSale];
                       for (var i = 0; i < data.length; i++) {
                         for (var j = 0; j < (data.length - i - 1); j++) {
-                          if (data[j].product.sold < data[j + 1].product.sold) {
+                          if (data[j].sold < data[j + 1].sold) {
                             var temp = data[j];
                             data[j] = data[j + 1];
                             data[j + 1] = temp;
@@ -175,33 +175,35 @@ function PaginatedItems({ flashSale }) {
       {flashSale.length === 0 ? (
         <h1 className='text-center font-semibold text-3xl'>Không có sách</h1>
       ) : (
-        <>
+        <div className='flex flex-col justify-between items-end h-full'>
           <div className=' grid grid-cols-5 w-full justify-center items-center max-2xl:grid-cols-4 max-lg:grid-cols-3 max-md:grid-cols-2 max-sm:grid-cols-1 mt-24'>
             {currentflashSale && currentflashSale.map((book, index) => (
-              <BookCard book={book.product} key={index} />
+              <BookCard book={book} key={index} />
             ))}
           </div>
-          <ReactPaginate
-            nextLabel="->"
-            onPageChange={handlePageClick}
-            pageRangeDisplayed={3}
-            marginPagesDisplayed={2}
-            pageCount={pageCount}
-            previousLabel="<-"
-            pageClassName="page-item p-1"
-            pageLinkClassName="page-link p-1"
-            previousClassName="page-item p-1"
-            previousLinkClassName="page-link p-1"
-            nextClassName="page-item p-1"
-            nextLinkClassName="page-link p-1"
-            breakLabel="..."
-            breakClassName="page-item p-1"
-            breakLinkClassName="page-link p-1"
-            containerClassName="pagination p-1"
-            activeClassName="active p-1"
-            renderOnZeroPageCount={null}
-          />
-        </>
+          <div className=' w-full relative bottom-0'>
+            <ReactPaginate
+              nextLabel="->"
+              onPageChange={handlePageClick}
+              pageRangeDisplayed={3}
+              marginPagesDisplayed={2}
+              pageCount={pageCount}
+              previousLabel="<-"
+              pageClassName="page-item p-1 "
+              pageLinkClassName="page-link p-1"
+              previousClassName="page-item p-1"
+              previousLinkClassName="page-link p-1"
+              nextClassName="page-item p-1"
+              nextLinkClassName="page-link p-1"
+              breakLabel="..."
+              breakClassName="page-item p-1"
+              breakLinkClassName="page-link p-1"
+              containerClassName="pagination p-1"
+              activeClassName="active p-1"
+              renderOnZeroPageCount={null}
+            />
+          </div>
+        </div>
       )}
     </>
   );

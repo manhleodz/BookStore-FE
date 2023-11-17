@@ -3,7 +3,7 @@ import Footer from './Widgets/Footer/Footer';
 
 export default function Contact() {
 
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState(true);
   const [email, setEmail] = useState();
   const [message, setMessage] = useState();
 

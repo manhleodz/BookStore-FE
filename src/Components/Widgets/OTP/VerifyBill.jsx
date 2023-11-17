@@ -6,6 +6,7 @@ import OtpInput from "otp-input-react";
 import { useNavigate } from 'react-router-dom';
 import { Bill } from '../../../Network/Bill';
 import ToastMessage from '../ToastMessage';
+import { ToastContainer } from 'react-toastify';
 
 export default function VerifyBill({ phone, getPhone, bill, name, address, note }) {
 
@@ -52,9 +53,9 @@ export default function VerifyBill({ phone, getPhone, bill, name, address, note 
                 console.log(err);
             });
         }).catch((res) => {
-            if (res.message === "Firebase: The SMS code has expired. Please re-send the verification code to try again. (auth/code-expired).") {
+            if (res.message.includes("Firebase: The SMS code has expired. Please re-send the verification code to try again. (auth/code-expired).")) {
                 ToastMessage.showToastWarnMessage("Mã hết hạn");
-            } else {
+            } else if (res.message.includes("the phone auth credential is invalid")) {
                 ToastMessage.showToastWarnMessage("Sai mã!");
             }
         })
@@ -96,6 +97,7 @@ export default function VerifyBill({ phone, getPhone, bill, name, address, note 
                     </div>
                 </div>
             </center>
+            <ToastContainer />
         </div>
     )
 }

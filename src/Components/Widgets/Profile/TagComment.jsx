@@ -7,22 +7,9 @@ import Rating from '@mui/material/Rating';
 import Box from '@mui/material/Box';
 import StarIcon from '@mui/icons-material/Star';
 
-const labels = {
-    1: 'Không hài lòng',
-    2: 'Chưa hài lòng',
-    3: 'Hơi hài lòng',
-    4: 'Hài lòng',
-    5: 'Rất hài lòng',
-};
-
-function getLabelText(value) {
-    return `${value} Star${value !== 1 ? 's' : ''}, ${labels[value]}`;
-}
 
 export default function TagComment({ comment, id, setComments, comments }) {
 
-    const [value, setValue] = React.useState(2);
-    const [hover, setHover] = React.useState(-1);
     const [option, setOption] = useState(false);
     const user = useSelector(state => state.authentication.user);
 
@@ -54,11 +41,11 @@ export default function TagComment({ comment, id, setComments, comments }) {
                             onClick={() => navigate(`/detail/${comment.Product.name}/${comment.Product.id}`)}
                             style={{ wordBreak: "break-all", textOverflow: "ellipsis", whiteSpace: "nowrap", overflow: 'hidden' }}
                         >
-                            Sách {comment.Product.name}
+                            {comment.Product.name}
                         </h1>
                         <Box
                             sx={{
-                                width: 200,
+                                width: 100,
                                 display: 'flex',
                                 alignItems: 'center',
                             }}
@@ -67,8 +54,8 @@ export default function TagComment({ comment, id, setComments, comments }) {
                                 name="hover-feedback"
                                 value={comment.rating}
                                 precision={0.5}
-                                getLabelText={getLabelText}
-                                emptyIcon={<StarIcon style={{ opacity: 0.55 }} fontSize="inherit" />}
+                                emptyIcon={<StarIcon style={{ opacity: 0.5 }} fontSize="inherit" />}
+                                readOnly
                             />
                         </Box>
                         <h1

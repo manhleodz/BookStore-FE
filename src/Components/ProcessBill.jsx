@@ -212,7 +212,7 @@ export default function ProcessBill() {
               ))}
             </div>
             <div className=' flex items-center justify-between'>
-              {bill.CouponId !== null ? (
+              {bill.payment !== bill.price ? (
                 <h1 className=' flex items-center text-lg font-semibold'>
                   Đã áp mã giảm giá
                   <svg xmlns="http://www.w3.org/2000/svg" height="1.5em" viewBox="0 0 448 512" className='ml-1 bg-yellow-200 fill-red-600'>

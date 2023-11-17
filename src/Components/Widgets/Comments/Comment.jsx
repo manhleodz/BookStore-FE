@@ -7,7 +7,7 @@ import { useTranslation } from 'react-i18next';
 import Rating from '@mui/material/Rating';
 
 
-export default function Comment({ comment, setComments, listCmt, user, detail, setDetail }) {
+export default function Comment({ comment, setComments, listCmt, user, detail, setDetail, setReload }) {
 
   const owner = useSelector(state => state.authentication.user);
   const { t } = useTranslation();
@@ -17,17 +17,20 @@ export default function Comment({ comment, setComments, listCmt, user, detail, s
 
   const UpdateComment = (e) => {
     e.preventDefault();
+    setReload(true);
     CommentApi.editComment(comment.id, {
       commentBody: newComment
     }).then(() => {
       CommentApi.getCommentsByProductId(comment.ProductId).then(res => {
         setComments(res.data.reverse());
+        setReload(false);
       }).catch(err => console.log(err))
     })
     setNewComment('');
   }
 
   const deleteComment = () => {
+    setReload(true);
     CommentApi.deleteComment(comment.id)
       .then(() => {
         const newList = listCmt.filter(comment1 => comment1.id !== comment.id)
@@ -39,6 +42,7 @@ export default function Comment({ comment, setComments, listCmt, user, detail, s
         }, comment.ProductId).then(() => {
           Detail.getDetailProduct(detail.id).then((response) => {
             setDetail(response.data[0]);
+            setReload(false);
           });
         }).catch(err => {
           console.error(err);

@@ -163,9 +163,9 @@ export default function Header({ user }) {
                                 <li>
                                     <div className="block cursor-pointer hover:underline text-lg py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 " onClick={() => { navigate('/') }}>{t('homepage')}</div>
                                 </li>
-                                <li>
+                                {/* <li>
                                     <div className="block cursor-pointer hover:underline text-lg py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 " onClick={() => { navigate('/') }}>{t('genre')}</div>
-                                </li>
+                                </li> */}
                                 <li>
                                     <div className="block cursor-pointer hover:underline text-lg py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 " onClick={() => { navigate('/about') }}>{t('About')}</div>
                                 </li>

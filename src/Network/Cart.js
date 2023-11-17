@@ -54,4 +54,12 @@ export const CartApi = {
             }
         });
     },
+
+    async buyCart(data) {
+        return axios.put(`${getApiUrl}/cart`, data, {
+            headers: {
+                accessToken: localStorage.getItem("accessToken"),
+            }
+        })
+    },
 }

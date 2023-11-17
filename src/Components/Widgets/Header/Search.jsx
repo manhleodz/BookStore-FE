@@ -63,12 +63,7 @@ export default function Search() {
 
     useEffect(() => {
         Product.getList().then((res) => {
-
-            let arr = [];
-            for (let i of res.data) {
-                arr.push(i.product);
-            }
-            setData(arr);
+            setData(res.data);
         });
     }, [])
 
@@ -118,8 +113,8 @@ export default function Search() {
                 )}
             </div>
             <div className=' space-x-2 text-sm underline flex '>
-                <h1 className=' cursor-pointer hover:text-gray-600' onClick={() => navigate('/products/dac nhan tam')} href={`${import.meta.env.VITE_HOMEURL}products/dac nhan tam`}>Đắc nhâm tâm</h1>
-                <h1 className=' cursor-pointer hover:text-gray-800' onClick={() => navigate('/products/khong diet khong sinh dung so hai')} href={`${import.meta.env.VITE_HOMEURL}products/khong diet khong sinh dung so hai`}>Không diệt không sinh đừng sợ hãi</h1>
+                <h1 className=' cursor-pointer hover:text-gray-600' onClick={() => navigate('/products/de men phieu luu ky')} href={`${import.meta.env.VITE_HOMEURL}products/de men phieu luu ky`}>Dế mèn phiêu lưu ký</h1>
+                <h1 className=' cursor-pointer hover:text-gray-800' onClick={() => navigate('/products/rung nauy')} href={`${import.meta.env.VITE_HOMEURL}products/rung nauy`}>Rừng NaUy</h1>
                 <h1 className=' cursor-pointer hover:text-gray-800 max-lg:hidden' onClick={() => navigate('/products/di gap mua xuan')} href={`${import.meta.env.VITE_HOMEURL}products/di gap mua xuan`}>Đi gặp mùa xuân</h1>
             </div>
         </div>

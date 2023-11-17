@@ -90,7 +90,6 @@ export default function Cart() {
                                             onClick={() => {
                                                 if (selected.length !== 0) {
                                                     if (afterCoupon !== 0) {
-
                                                         Bill.createBill({
                                                             phone: user.phonenumber,
                                                             address: user.address,
@@ -101,13 +100,19 @@ export default function Cart() {
                                                             payment: afterCoupon
                                                         }).then((res) => {
                                                             if (res.status === 200) {
+                                                                let ids = [];
                                                                 for (let i = 0; i < selected.length; i++) {
-                                                                    CartApi.updateCart({ BillId: res.data.id }, selected[i].id).then(() => {
-                                                                        const index = cart.findIndex((c) => c.cart.id === selected[i].id)
-                                                                        dispatch(deleteCart(index));
-                                                                    });
+                                                                    ids.push(selected[i].id)
+                                                                    const index = cart.findIndex((c) => c.cart.id === selected[i].id);
+                                                                    dispatch(deleteCart(index));
                                                                 }
-                                                                navigate(`/bill/${res.data.id}`);
+
+                                                                CartApi.buyCart({
+                                                                    ids: ids,
+                                                                    BillId: res.data.id
+                                                                }).then(() => {
+                                                                    navigate(`/bill/${res.data.id}`);
+                                                                })
                                                             }
                                                         })
                                                     } else {
@@ -120,13 +125,18 @@ export default function Cart() {
                                                             payment: total
                                                         }).then((res) => {
                                                             if (res.status === 200) {
+                                                                let ids = [];
                                                                 for (let i = 0; i < selected.length; i++) {
-                                                                    CartApi.updateCart({ BillId: res.data.id }, selected[i].id);
-
+                                                                    ids.push(selected[i].id)
                                                                     const index = cart.findIndex((c) => c.id === selected[i].id)
                                                                     dispatch(deleteCart(index));
                                                                 }
-                                                                navigate(`/bill/${res.data.id}`);
+                                                                CartApi.buyCart({
+                                                                    ids: ids,
+                                                                    BillId: res.data.id
+                                                                }).then(() => {
+                                                                    navigate(`/bill/${res.data.id}`);
+                                                                })
                                                             }
                                                         })
                                                     }

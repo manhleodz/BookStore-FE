@@ -34,12 +34,12 @@ export default function FilterBar({ flashSale, filteredData, setFilteredData }) 
     else {
       flashSale.map(book => {
         for (let i of selectedAuthor) {
-          if (i === book.details.author) {
+          if (i === book.DetailProduct.author) {
             result.push(book);
           }
         }
         for (let i of selectedPrice) {
-          if (i.lower < book.product.price && i.upper > book.product.price) {
+          if (i.lower < book.price && i.upper > book.price) {
             result.push(book);
           }
         }
@@ -347,17 +347,17 @@ export default function FilterBar({ flashSale, filteredData, setFilteredData }) 
               else {
                 flashSale.map(book => {
                   for (let i of selectedAuthor) {
-                    if (i === book.details.author) {
+                    if (i === book.DetailProduct.author) {
                       result.push(book);
                     }
                   }
                   for (let i of selectedCategory) {
-                    if (book.details.category === i) {
+                    if (book.DetailProduct.category === i) {
                       result.push(book);
                     }
                   }
                   for (let i of selectedPrice) {
-                    if (i.lower < book.product.price && i.upper > book.product.price) {
+                    if (i.lower < book.price && i.upper > book.price) {
                       result.push(book);
                     }
                   }

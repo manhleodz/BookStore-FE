@@ -6,40 +6,7 @@ import { getApiUrl } from '../../../Utils/Config/getApiUrl';
 
 export default function FlasheSale() {
 
-    var date = Date.now();
-
-    const [days, setDays] = useState(0);
-    const [hours, setHours] = useState(0);
-    const [minutes, setMinutes] = useState(0);
-    const [seconds, setSeconds] = useState(0);
-    const [inputDate, setInputDate] = useState("1 Dec 2023");
-    const [currentDate, setCurrentDate] = useState(inputDate);
-    const [endTime, setEndTime] = useState(null);
     const [flashSale, setFlashSale] = useState(null);
-    const [page, setPage] = useState(1);
-
-
-    function formatTime(time) {
-        return time < 10 ? `0${time}` : time;
-    }
-
-    useEffect(() => {
-
-        date = date - 1000;
-        const changingDate = new Date(inputDate);
-        const currentDate = new Date();
-        const totalSeconds = (changingDate - currentDate) / 1000;
-
-        let myInterval = setInterval(() => {
-            setDays(formatTime(Math.floor(totalSeconds / 3600 / 24)));
-            setHours(Math.floor(totalSeconds / 3600) % 24);
-            setMinutes(Math.floor(totalSeconds / 60) % 60);
-            setSeconds(Math.floor(totalSeconds % 60));
-        }, 1000)
-        return () => {
-            clearInterval(myInterval);
-        };
-    }, [date])
 
     useEffect(() => {
 
@@ -61,7 +28,7 @@ export default function FlasheSale() {
                             <path d="M349.4 44.6c5.9-13.7 1.5-29.7-10.6-38.5s-28.6-8-39.9 1.8l-256 224c-10 8.8-13.6 22.9-8.9 35.3S50.7 288 64 288H175.5L98.6 467.4c-5.9 13.7-1.5 29.7 10.6 38.5s28.6 8 39.9-1.8l256-224c10-8.8 13.6-22.9 8.9-35.3s-16.6-20.7-30-20.7H272.5L349.4 44.6z" />
                         </svg>
                     </div>
-                    <div className='font-bold text-xl ml-1 w-full flex justify-between'>
+                    <div className='font-bold text-xl ml-1 w-full flex justify-between items-center'>
                         <h1 className='text-white'>FLASH SALE:</h1>
                         <div className='flex items-center'>
                             <h1 className='text-lg font-normal'>Kết thúc sau:</h1>
@@ -72,7 +39,6 @@ export default function FlasheSale() {
                 <div className=' flex items-center justify-between w-full'>
                     <button
                         onClick={() => {
-                            setPage(page => page = page + 1);
                             document.getElementById('container').scrollLeft -= 600;
                         }}
                         className='z-50 p-2 w-10 h-10 flex justify-center items-center active:scale-105 rounded-full bg-gray-300'
@@ -98,7 +64,6 @@ export default function FlasheSale() {
                     </div>
                     <button
                         onClick={() => {
-                            setPage(page => page = page - 1);
                             document.getElementById('container').scrollLeft += 600;
                         }}
                         className='z-50 p-2 w-10 h-10 flex justify-center items-center active:scale-105 rounded-full bg-gray-300'

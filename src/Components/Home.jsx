@@ -23,7 +23,7 @@ export default function Home() {
       [result[i], result[j]] = [result[j], result[i]];
     }
     return result;
-  }
+  };
 
   useEffect(() => {
 
@@ -39,12 +39,10 @@ export default function Home() {
 
   if (!flashSale) return null;
 
-
-
-
   if (loading) {
     return <div className=' fixed top-1/2 left-1/2'><Loading /></div>
-  }
+  };
+
   return (
     <div className='bg-gray-200 h-full'>
       <div className='relative top-52'>
@@ -68,8 +66,8 @@ export default function Home() {
           <ListBook
             flashSale={shuffleArray(flashSale)}
           />
-          <ListByCategory category={'Tiểu thuyết'}/>
-          <ListByCategory category={'Gia đình'}/>
+          {/* <ListByCategory category={'Tiểu thuyết'}/>
+          <ListByCategory category={'Gia đình'}/> */}
         </div>
         <Footer />
       </div>

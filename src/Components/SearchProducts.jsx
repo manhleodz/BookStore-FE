@@ -9,7 +9,7 @@ import Footer from './Widgets/Footer/Footer';
 export default function SearchProducts() {
 
 
-    const [data, setData] = useState(null);
+    const [data, setData] = useState();
     const [loading, setLoading] = useState(true);
     const [sort, setSort] = useState("Tiêu biểu");
     const [filteredData, setFilteredData] = useState(null);
@@ -47,7 +47,7 @@ export default function SearchProducts() {
 
             if (res.data) {
                 const newFilter = res.data.filter((value) => {
-                    return removeAccents(value.product.name).toLowerCase().includes(removeAccents(wordEntered).toLowerCase());
+                    return removeAccents(value.name).toLowerCase().includes(removeAccents(wordEntered).toLowerCase());
                 });
                 setData(newFilter);
             }
@@ -58,6 +58,7 @@ export default function SearchProducts() {
         }, 1000);
         return () => clearTimeout(timer);
     }, [wordEntered])
+
 
     if (loading) {
         return <div className=' fixed top-1/2 left-1/2'><Loading /></div>
@@ -108,7 +109,7 @@ function PaginatedItems({ data }) {
                 <>
                     <div className=' grid grid-cols-5 w-full justify-center items-center max-2xl:grid-cols-4 max-lg:grid-cols-3 max-md:grid-cols-2 max-sm:grid-cols-1 mt-24'>
                         {currentdata && currentdata.map((book, index) => (
-                            <BookCard book={book.product} key={index} />
+                            <BookCard book={book} key={index} />
                         ))}
                     </div>
                     <ReactPaginate

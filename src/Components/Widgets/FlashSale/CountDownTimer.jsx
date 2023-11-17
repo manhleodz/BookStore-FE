@@ -8,11 +8,7 @@ export default function CountdownTimer() {
     const [hours, setHours] = useState(0);
     const [minutes, setMinutes] = useState(0);
     const [seconds, setSeconds] = useState(0);
-    const [inputDate, setInputDate] = useState("1 Dec 2023");
-    const [currentDate, setCurrentDate] = useState(inputDate);
-    const [endTime, setEndTime] = useState(null);
-    const [flashSale, setFlashSale] = useState(null);
-    const [page, setPage] = useState(1);
+    const [inputDate, setInputDate] = useState("31 Dec 2023");
 
 
     function formatTime(time) {
@@ -38,20 +34,20 @@ export default function CountdownTimer() {
     }, [date])
 
     return (
-        <div className=' flex items-center space-x-3'>
-            <div className="countdown-value flex items-center w-10 h-10 justify-center bg-white">
+        <div className=' flex items-center font-light'>
+            <div className="countdown-value flex items-center w-8 h-8 rounded-md justify-center bg-white">
                 <p className="big-text">{days}</p>
             </div>
-            <span>Ngày</span>
-            <div className="countdown-value flex items-center w-10 h-10 justify-center bg-white">
+            <span className=' pr-3'>Ngày</span>
+            <div className="countdown-value flex items-center w-8 h-8 rounded-md justify-center bg-white">
                 <p className="big-text">{hours}</p>
             </div>
-            <span>Giờ</span>
-            <div className="countdown-value flex items-center w-10 h-10 justify-center bg-white">
+            <span className=' pr-3'>Giờ</span>
+            <div className="countdown-value flex items-center w-8 h-8 rounded-md justify-center bg-white">
                 <p className="big-text">{minutes}</p>
             </div>
-            <span>Phút</span>
-            <div className="countdown-value flex items-center w-10 h-10 justify-center bg-white">
+            <span className=' pr-3'>Phút</span>
+            <div className="countdown-value flex items-center w-8 h-8 rounded-md justify-center bg-white">
                 <p className="big-text">{seconds}</p>
             </div>
             <span>Giây</span>
