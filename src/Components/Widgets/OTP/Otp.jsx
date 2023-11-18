@@ -3,7 +3,7 @@ import { Authentication } from '../../../Network/Authentication';
 import { ToastContainer } from 'react-toastify';
 import toastMessage from '../ToastMessage';
 
-export default function Otp({ username, email, signUp }) {
+export default function Otp({ username, email, signUp, setReload }) {
 
     const [OTP, setOTP] = useState(Math.floor(Math.random() * 1000000));
     const [inputOTP, setInputOTP] = useState("");
@@ -14,7 +14,7 @@ export default function Otp({ username, email, signUp }) {
 
     return (
         <div
-            className=' fixed top-0 left-0 w-screen h-screen z-50 flex justify-center items-center'
+            className=' fixed top-0 left-0 w-screen h-screen z-10 flex justify-center items-center'
             style={{ backgroundColor: 'rgb(0,0,0,0.4)' }}
             id='background'
         >
@@ -24,7 +24,7 @@ export default function Otp({ username, email, signUp }) {
                     <div className=' space-y-5 mt-5 w-10/12'>
                         <div className=''>
                             <h1 className='text-sm '>Mã xác nhận</h1>
-                            <div className='flex items-center justify-between rounded-lg w-full border-2 border-gray-500 px-1  active:ring-2 active:border-blue-400 active:border-2 active:ring-blue-400'>
+                            <div className='flex items-center justify-between rounded-lg w-full border-2 border-gray-500 px-1 h-10 active:ring-2 active:border-blue-400 active:border-2 active:ring-blue-400'>
                                 <input
                                     type='text' onChange={(e) => {
                                         setInputOTP(e.target.value);
@@ -34,7 +34,7 @@ export default function Otp({ username, email, signUp }) {
                                 <h1
                                     className='text-sm text-blue-500 cursor-pointer text-right'
                                     onClick={() => {
-                                        toastMessage.showToastSuccessMessage("Kiểm tra email nhé! Code có hiệu quả trong 1 phút");
+                                        toastMessage.showToastSuccessMessage("Kiểm tra email nhé! Code có hiệu quả trong 5 phút");
                                         Authentication.getCode({
                                             email: email,
                                             username: username,
@@ -46,7 +46,7 @@ export default function Otp({ username, email, signUp }) {
                                         setTimeout(timer);
                                     }}
                                 >
-                                    Gửi mã OTP
+                                    Gửi OTP
                                 </h1>
                                 <ToastContainer
                                     position="top-right"

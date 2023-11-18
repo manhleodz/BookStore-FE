@@ -171,7 +171,7 @@ export default function DetailProduct() {
                     </div>
                   </h1>
                   <h1 className='text-lg'>{t('genre')}: {detail.category !== null ? `${detail.category}` : `${t('updating')}`}</h1>
-                  <h2 className='text-lg flex'>
+                  <h2 className='text-lg flex items-center'>
                     {t('rating')}: {detail.ratingstars !== null ? `${detail.ratingstars}` : `${t('updating')}`}
                     <Rating name="read-only" value={Number(detail.ratingstars)} precision={0.5} readOnly />
                   </h2>

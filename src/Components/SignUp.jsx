@@ -205,7 +205,7 @@ function Signup() {
           }
         }}
       >
-        <Otp email={email} username={username} signUp={signUp} />
+        <Otp email={email} username={username} signUp={signUp} setReload={setReload}/>
       </div>
     </>
   );

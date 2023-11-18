@@ -37,8 +37,12 @@ export default function LoginModal() {
       className=' fixed top-0 left-0 w-screen h-screen z-50 flex justify-center items-center'
       style={{ backgroundColor: 'rgb(0,0,0,0.4)' }}
       id='background'
+
     >
-      <div className=' bg-white w-96 space-y-5 flex flex-col justify-center items-center p-3 rounded-md'>
+      <form action={(e) => {
+        e.preventDefault();
+        onsubmit(e);
+      }} className=' bg-white w-96 space-y-5 flex flex-col justify-center items-center p-3 rounded-md'>
         <h1 className='text-xl font-medium'>Đăng nhập</h1>
         <div className=' w-11/12'>
           <h1 className=' text-sm text-gray-500'>Tên người dùng</h1>
@@ -107,7 +111,7 @@ export default function LoginModal() {
         }}
           className=' w-1/3 p-2 border-2 text-green-600 font-medium border-green-600 rounded-md active:ring-1 active:ring-green-400'>Bỏ qua
         </button>
-      </div>
+      </form>
     </div>
   )
 }

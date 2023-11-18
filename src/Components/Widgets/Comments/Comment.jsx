@@ -13,20 +13,23 @@ export default function Comment({ comment, setComments, listCmt, user, detail, s
   const { t } = useTranslation();
   const [edit, setEdit] = useState(true);
   const [options, setOptions] = useState(false);
-  const [newComment, setNewComment] = useState('');
+  const [newComment, setNewComment] = useState(comment.commentBody);
 
   const UpdateComment = (e) => {
     e.preventDefault();
-    setReload(true);
-    CommentApi.editComment(comment.id, {
-      commentBody: newComment
-    }).then(() => {
-      CommentApi.getCommentsByProductId(comment.ProductId).then(res => {
-        setComments(res.data.reverse());
-        setReload(false);
-      }).catch(err => console.log(err))
-    })
-    setNewComment('');
+    if (newComment !== comment.commentBody) {
+      setReload(true);
+      CommentApi.editComment(comment.id, {
+        commentBody: newComment
+      }).then(() => {
+        CommentApi.getCommentsByProductId(comment.ProductId).then(res => {
+          setComments(res.data.reverse());
+          setReload(false);
+          setEdit(true);
+        }).catch(err => console.log(err))
+      })
+      setNewComment('');
+    }
   }
 
   const deleteComment = () => {
@@ -99,19 +102,21 @@ export default function Comment({ comment, setComments, listCmt, user, detail, s
           ) : (
             <form
               action={UpdateComment}
-              onClick={(e) => {
-                setEdit(true);
-              }}
-              className=' w-full h-full'
+              className=' w-full h-full  border rounded-md focus:outline focus:outline-blue-300 shadow-sm shadow-blue-300'
             >
               <textarea
-                className=' w-full border bg-gray-100 rounded-md focus:outline focus:outline-blue-300'
+                className='w-full h-full bg-gray-100 outline-none px-3 pt-3'
                 autoFocus={true}
                 defaultValue={comment.commentBody}
                 onChange={(e) => setNewComment(e.target.value)}
               >
               </textarea>
-              <div className='w-full flex justify-end h-full relative z-0'>
+              <div className='w-full flex justify-between h-full relative z-0'>
+                <button onClick={() => setEdit(true)}>
+                  <svg xmlns="http://www.w3.org/2000/svg" height="1.6em" fill='red' viewBox="0 0 512 512">
+                    <path d="M256 48a208 208 0 1 1 0 416 208 208 0 1 1 0-416zm0 464A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM175 175c-9.4 9.4-9.4 24.6 0 33.9l47 47-47 47c-9.4 9.4-9.4 24.6 0 33.9s24.6 9.4 33.9 0l47-47 47 47c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9l-47-47 47-47c9.4-9.4 9.4-24.6 0-33.9s-24.6-9.4-33.9 0l-47 47-47-47c-9.4-9.4-24.6-9.4-33.9 0z" />
+                  </svg>
+                </button>
                 <button onClick={UpdateComment} className=' p-2 bg-blue-400 text-white rounded-md hover:bg-blue-600 active:ring active:ring-blue-300'>
                   Chỉnh sửa
                 </button>

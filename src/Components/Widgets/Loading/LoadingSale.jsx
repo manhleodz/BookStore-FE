@@ -1,25 +1,39 @@
-import React, { useEffect, useState } from 'react';
-import BookCard from '../SaleBook/BookCard';
-import CountDownTimer from './CountDownTimer';
-import axios from 'axios';
-import { getApiUrl } from '../../../Utils/Config/getApiUrl';
-import { LoadingSale } from '../Loading/LoadingSale';
+import CountdownTimer from "../FlashSale/CountDownTimer";
 
-export default function FlasheSale() {
+export const LoadingCard = () => {
+    return (
+        <div
+            className=' bg-white border border-gray-200 m-2 px-3 w-full h-auto hover:shadow-2xl cursor-pointer flex flex-col justify-center items-center'
+            style={{ maxWidth: "190px" }}
 
-    const [flashSale, setFlashSale] = useState(null);
+        >
+            <div className='blurred-img w-full h-auto flex items-center justify-center bg-gray-300 animate-pulse'>
+                {/* <img
+                    alt="..." src={book.image} className='object-contain'
+                    style={{ height: "220px", maxWidth: "150px" }}
+                    title={book.name}
+                    loading="lazy"
+                /> */}
+                <div
+                    style={{ height: "220px", maxWidth: "150px" }}
+                    className=""
+                >
+                </div>
+            </div>
+            <div className='w-44' >
+                <p className='font-medium h-10 pt-3 mb-2 text-left break-words' style={{ wordBreak: "break-all", textOverflow: "ellipsis", whiteSpace: "nowrap", overflow: 'hidden' }}></p>
+                <span className='  relative text-red-500 font-bold text-xl text-left'></span>
+            </div>
+            <div className='h-6 w-full bg-gray-300 animate-pulse rounded-2xl'>
+                <div className={`h-full bg-gray-300 animate-pulse rounded-2xl`}></div>
+            </div>
+            <h1 className=' relative bottom-6 text-white'></h1>
+        </div>
+    );
+}
 
-    useEffect(() => {
-
-        axios.get(`${getApiUrl}/flashsale/products`).then((response) => {
-            setFlashSale(response.data);
-        }).catch((error) => {
-            console.log(error);
-        });
-    }, []);
-
-    if (!flashSale) return <LoadingSale />;
-
+export const LoadingSale = () => {
+    const loadPages = [1, 6];
     return (
         <div className='w-full flex flex-col justify-center items-center mt-7'>
             <div className='w-9/12 mt-8 flex flex-col justify-center items-center shadow-xl bg-white rounded-lg relative z-10'>
@@ -33,7 +47,7 @@ export default function FlasheSale() {
                         <h1 className='text-white'>FLASH SALE:</h1>
                         <div className='flex items-center'>
                             <h1 className='text-lg font-normal'>Kết thúc sau:</h1>
-                            <CountDownTimer />
+                            <CountdownTimer />
                         </div>
                     </div>
                 </div>
@@ -51,16 +65,11 @@ export default function FlasheSale() {
                     <div className='flex w-full items-center justify-start mx-auto overflow-hidden border-gray-200 shadow-sm p-1 border relative z-10' id='container' style={{ width: `1300px` }}>
                         <div
                             className='w-full flex whitespace-nowrap relative -z-10'
-                            style={{ width: `${flashSale.length * 200}px` }}
                             onScroll={(e) => {
                                 e.timeStamp = 0;
                             }}
                         >
-                            {flashSale.map((book, index) => (
-                                <div key={index} className=' inline-block'>
-                                    <BookCard book={book.Product} />
-                                </div>
-                            ))}
+                            {loadPages.map(() => { return <LoadingCard /> })}
                         </div>
                     </div>
                     <button
@@ -76,5 +85,5 @@ export default function FlasheSale() {
                 </div>
             </div>
         </div>
-    )
+    );
 }

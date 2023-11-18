@@ -24,7 +24,6 @@ export default function BookCard({ book }) {
                     alt="..." src={book.image} className='object-contain'
                     style={{ height: "220px", maxWidth: "150px" }}
                     title={book.name}
-                    loading="lazy"
                 />
             </div>
             <div className='w-44' >

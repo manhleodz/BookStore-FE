@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Product } from '../../../Network/Product';
 import BookCard from '../SaleBook/BookCard';
+import { LoadingSale } from '../Loading/LoadingSale';
 
 export default function ListByCategory({ category }) {
 
@@ -15,9 +16,7 @@ export default function ListByCategory({ category }) {
     }, [])
 
     if (!list) return (
-        <div>
-
-        </div>
+        <LoadingSale />
     )
 
     return (
