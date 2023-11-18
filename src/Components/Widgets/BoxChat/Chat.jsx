@@ -54,9 +54,9 @@ export default function Chat({ user, socket, open, setOpen }) {
             {open && (
                 <div>
                     <div className=' bg-green-700 flex items-center justify-between p-3 rounded-t-2xl text-white '>
-                        <img alt='emiu' src='https://newsmd2fr.keeng.vn/tiin/archive/images/296/202104/20210408/tinngan_115313_240592402_1.jpg' className='w-10 h-10 rounded-full' />
+                        <img alt='emiu' src='https://i.ex-cdn.com/mgn.vn/files/content/2022/08/30/dtcl-chi-tiet-cac-linh-thu-moi-1-1545.jpg' className='w-10 h-10 rounded-full' />
                         <div>
-                            <h1 >Melody Mark</h1>
+                            <h1 >Hung Luxury</h1>
                             <h1 className='w-56 text-base'
                                 style={{ wordBreak: "break-all", textOverflow: "ellipsis", whiteSpace: "nowrap", overflow: 'hidden' }}
                                 title='Sẵn sàng giải đáp mọi thắc mắc của bạn'
@@ -77,6 +77,19 @@ export default function Chat({ user, socket, open, setOpen }) {
                     </div>
                     <div className=' bg-white'>
                         <ScrollToBottom className='message-container'>
+                            <div
+                                className="message"
+                                id="shop"
+                            >
+                                <div className='w-full'>
+                                    <div className="message-content">
+                                        <p>Hãy để lại lời nhắn. Hung Luxury sẽ hỗ trợ bạn. Hung Luxury xin cảm ơn!</p>
+                                    </div>
+                                    <div className="message-meta flex">
+                                        <p id="author">Melody Mark</p>
+                                    </div>
+                                </div>
+                            </div>
                             {messageList.map((messageContent, index) => {
                                 return (
                                     <div

@@ -1,11 +1,19 @@
-import React, { useEffect, useState } from 'react';
-import ReactStars from "react-rating-stars-component";
+import React, { useState } from 'react';
+import Box from '@mui/material/Box';
+import StarIcon from '@mui/icons-material/Star';
 import { useSelector } from 'react-redux';
 import { CommentApi } from '../../../Network/Comments';
 import { Detail } from '../../../Network/Detail';
 import { useTranslation } from 'react-i18next';
 import Rating from '@mui/material/Rating';
 
+const labels = {
+  1: 'Không hài lòng',
+  2: 'Chưa hài lòng',
+  3: 'Hơi hài lòng',
+  4: 'Hài lòng',
+  5: 'Rất hài lòng',
+};
 
 export default function Comment({ comment, setComments, listCmt, user, detail, setDetail, setReload }) {
 
@@ -14,13 +22,16 @@ export default function Comment({ comment, setComments, listCmt, user, detail, s
   const [edit, setEdit] = useState(true);
   const [options, setOptions] = useState(false);
   const [newComment, setNewComment] = useState(comment.commentBody);
+  const [rating, setRating] = useState(comment.rating);
+  const [hover, setHover] = React.useState(-1);
 
   const UpdateComment = (e) => {
     e.preventDefault();
     if (newComment !== comment.commentBody) {
       setReload(true);
       CommentApi.editComment(comment.id, {
-        commentBody: newComment
+        commentBody: newComment,
+        rating: rating
       }).then(() => {
         CommentApi.getCommentsByProductId(comment.ProductId).then(res => {
           setComments(res.data.reverse());
@@ -93,17 +104,36 @@ export default function Comment({ comment, setComments, listCmt, user, detail, s
       </div>
       <div className='w-full flex items-center justify-between'>
         <div className=' w-full'>
-          <div className='flex items-center'>
-            <Rating name="read-only" value={Number(comment.rating)} readOnly />
-            <h1 className=' font-semibold'>{rank(comment.rating)}</h1>
-          </div>
+          {edit && (
+            <div className='flex items-center'>
+              <Rating name="read-only" value={Number(comment.rating)} readOnly />
+              <h1 className=' font-semibold'>{rank(comment.rating)}</h1>
+            </div>
+          )}
           {edit ? (
             <div className={` break-words w-full bg-white`} style={{ minHeight: '10px' }}>{comment.commentBody}</div>
           ) : (
             <form
               action={UpdateComment}
-              className=' w-full h-full  border rounded-md focus:outline focus:outline-blue-300 shadow-sm shadow-blue-300'
+              className=' w-full h-full  border rounded-md focus:outline pt-3 focus:outline-blue-300 shadow-sm shadow-blue-300'
             >
+              <div className='flex items-center pb-2'>
+                <Rating
+                  name="hover-feedback"
+                  value={rating}
+                  precision={1}
+                  onChange={(event, newValue) => {
+                    setRating(newValue);
+                  }}
+                  onChangeActive={(event, newHover) => {
+                    setHover(newHover);
+                  }}
+                  emptyIcon={<StarIcon style={{ opacity: 0.55 }} fontSize="inherit" />}
+                />
+                {rating !== null && (
+                  <Box sx={{ ml: 2 }}>{labels[hover !== -1 ? hover : rating]}</Box>
+                )}
+              </div>
               <textarea
                 className='w-full h-full bg-gray-100 outline-none px-3 pt-3'
                 autoFocus={true}

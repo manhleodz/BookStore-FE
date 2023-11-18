@@ -17,6 +17,11 @@ export default function Layout({ children }) {
 
   const [open, setOpen] = useState(false);
 
+  const timeOut = setTimeout(() => {
+    document.getElementById('background1').style.display = 'block';
+    setOpen(true);
+  }, 5000)
+
   useEffect(() => {
     const accessToken = Authentication.getAccessToken();
     if (accessToken !== null) {
@@ -36,6 +41,8 @@ export default function Layout({ children }) {
           }
         });
     }
+
+    return () => clearTimeout(timeOut);
   }, [dispatch]);
 
   return (
@@ -59,6 +66,24 @@ export default function Layout({ children }) {
               socket.emit("join_room", user.id);
             }}
           />)}
+        </div>
+      </div>
+      <div id='background1' className=' hidden'>
+        <div
+          className=' fixed top-0 left-0 w-screen h-screen z-50 flex justify-center items-center'
+          style={{ backgroundColor: 'rgb(0,0,0,0.4)' }}
+        >
+          <div className=' flex flex-col items-center'>
+            <img alt='quangcao' src='https://image.moengage.com/fahasamoengage/20231118025055319210K3VWRPFahasaSaleT3BlackFridayPopup350x415pngcompfahasamoengage.png' />
+            <button
+              className=' text-white text-2xl font-bold border-white border-4 rounded-full w-10 h-10 flex items-center justify-center'
+              onClick={() => {
+                document.getElementById('background1').remove();
+              }}
+            >
+              X
+            </button>
+          </div>
         </div>
       </div>
     </div>
