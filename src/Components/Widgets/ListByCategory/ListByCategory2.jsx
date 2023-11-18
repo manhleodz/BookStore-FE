@@ -28,7 +28,7 @@ export default function ListByCategory({ category }) {
                 <div className=' flex items-center justify-between w-full'>
                     <button
                         onClick={() => {
-                            document.getElementById('container').translate -= 200;
+                            document.getElementById('container').scrollLeft -= 200;
                         }}
                         className='z-50 p-2 w-10 h-10 flex justify-center items-center active:scale-105 rounded-full bg-gray-300'
                     >
@@ -56,7 +56,7 @@ export default function ListByCategory({ category }) {
                     </div>
                     <button
                         onClick={() => {
-                            document.getElementById('container').translate += 200;
+                            document.getElementById('container').scrollLeft += 200;
                         }}
                         className='z-50 p-2 w-10 h-10 flex justify-center items-center active:scale-105 rounded-full bg-gray-300'
                     >
