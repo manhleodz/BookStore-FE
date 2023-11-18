@@ -158,14 +158,11 @@ export default function Header({ user }) {
                         </button>
                     </div>
                     <div className='max-w-screen-xl flex flex-col-reverse items-center justify-between max-md:h-screen max-md:fixed max-md:w-1/2'>
-                        <div className={` duration-1000  transition flex flex-col items-center justify-between max-md:-translate-x-full ${click && 'max-md:translate-x-0'} max-md:w-1/2 max-md:bg-white max-md:z-20 max-md:fixed max-md:left-0 max-md:h-screen md:flex md:w-auto md:order-1`} id="navbar-user">
+                        <div className={` duration-1000  transition flex flex-col items-center justify-between max-md:-translate-x-full ${click && 'max-md:translate-x-0'} max-md:w-1/2 max-md:bg-white max-md:z-20 max-md:fixed max-md:left-0 max-md:top-0 max-md:h-screen md:flex md:w-auto md:order-1`} id="navbar-user">
                             <ul className="flex flex-col w-full max-md:w-full items-center border-gray-100 rounded-lg justify-center font-medium p-4 md:p-0 mt-4 border rounded-l md:flex-row md:space-x-8 md:mt-0 md:border-0 max-md:h-screen" >
                                 <li>
                                     <div className="block cursor-pointer hover:underline text-lg py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 " onClick={() => { navigate('/') }}>{t('homepage')}</div>
                                 </li>
-                                {/* <li>
-                                    <div className="block cursor-pointer hover:underline text-lg py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 " onClick={() => { navigate('/') }}>{t('genre')}</div>
-                                </li> */}
                                 <li>
                                     <div className="block cursor-pointer hover:underline text-lg py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 " onClick={() => { navigate('/about') }}>{t('About')}</div>
                                 </li>
@@ -173,9 +170,9 @@ export default function Header({ user }) {
                                     <div className="block cursor-pointer hover:underline text-lg py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 " onClick={() => { navigate('/contact') }}>{t('contact')}</div>
                                 </li>
                             </ul>
-                            <li className=' block w-full'>
+                            <ul className=' max-md:absolute w-full max-md:top-20'>
                                 <Search />
-                            </li>
+                            </ul>
                         </div>
                     </div>
                 </div>

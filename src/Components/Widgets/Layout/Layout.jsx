@@ -60,7 +60,7 @@ export default function Layout({ children }) {
           {!open && (<img
             alt='icon'
             src={messageIcon}
-            className=' fixed bottom-2 right-5 w-24 shadow-2xl rounded-full cursor-pointer'
+            className=' fixed bottom-2 right-5 w-20 shadow-2xl rounded-full cursor-pointer'
             onClick={() => {
               setOpen(true)
               socket.emit("join_room", user.id);

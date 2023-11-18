@@ -60,7 +60,7 @@ export default function SearchProducts() {
     }, [wordEntered])
 
 
-    if (loading) {
+    if (loading || !data) {
         return <div className=' fixed top-1/2 left-1/2'><Loading /></div>
     }
 

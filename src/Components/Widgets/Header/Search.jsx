@@ -115,7 +115,7 @@ export default function Search() {
             <div className=' space-x-2 text-sm underline flex '>
                 <h1 className=' cursor-pointer hover:text-gray-600' onClick={() => navigate('/products/de men phieu luu ky')}>Dế mèn phiêu lưu ký</h1>
                 <h1 className=' cursor-pointer hover:text-gray-800' onClick={() => navigate('/products/rung nauy')} >Rừng NaUy</h1>
-                <h1 className=' cursor-pointer hover:text-gray-800 max-lg:hidden' onClick={() => navigate('/products/hoang tu be')} >Hoàng tử bé</h1>
+                <h1 className=' cursor-pointer hover:text-gray-800' onClick={() => navigate('/products/hoang tu be')} >Hoàng tử bé</h1>
                 <h1 className=' cursor-pointer hover:text-gray-800 max-lg:hidden' onClick={() => navigate('/products/di gap mua xuan')} >Đi gặp mùa xuân</h1>
             </div>
         </div>

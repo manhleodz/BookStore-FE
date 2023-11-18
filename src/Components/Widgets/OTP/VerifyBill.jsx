@@ -45,10 +45,7 @@ export default function VerifyBill({ phone, getPhone, bill, name, address, note 
                 status: 'đã xử lý'
             }, bill.id).then((res) => {
                 ToastMessage.showToastSuccessMessage("Xác nhận thành công");
-                const timer = setTimeout(() => {
-                    navigate('/');
-                }, 2000);
-                clearTimeout(timer);
+                navigate('/');
             }).catch((err) => {
                 console.log(err);
             });
@@ -97,7 +94,7 @@ export default function VerifyBill({ phone, getPhone, bill, name, address, note 
                     </div>
                 </div>
             </center>
-            <ToastContainer />
+            <ToastContainer autoClose={1000} />
         </div>
     )
 }
