@@ -137,38 +137,38 @@ export default function FilterBar({ flashSale, filteredData, setFilteredData }) 
               </div>
               <div className="flex items-center p-2 rounded hover:bg-gray-200 ">
                 <input
-                  defaultChecked={selectedAuthor0 && selectedAuthor0.includes("Đéo nghĩ ra ông nào")}
+                  defaultChecked={selectedAuthor0 && selectedAuthor0.includes("Hùng Phạm")}
                   id="checkbox-item-5" onChange={(e) => {
                     if (e.target.checked) {
-                      setSelectedAuthor([...selectedAuthor, "Đéo nghĩ ra ông nào"])
+                      setSelectedAuthor([...selectedAuthor, "Hùng Phạm"])
                     } else {
                       const arr = selectedAuthor.filter(author => {
-                        return author !== "Đéo nghĩ ra ông nào"
+                        return author !== "Hùng Phạm"
                       })
                       setSelectedAuthor(arr);
                     }
                   }} type="checkbox" value="" className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 "
                 />
-                <label htmlFor="checkbox-item-5" className="w-full ml-2 text-sm font-medium text-gray-900 rounded cursor-pointer ">Đéo nghĩ ra ông nào</label>
+                <label htmlFor="checkbox-item-5" className="w-full ml-2 text-sm font-medium text-gray-900 rounded cursor-pointer ">Hùng Phạm</label>
               </div>
             </div>
             <div>
               <h1 className=' text-2xl font-semibold'>Thể Loại</h1>
               <div className="flex items-center p-2 rounded hover:bg-gray-200 ">
                 <input
-                  defaultChecked={selectedCategory0 && selectedCategory0.includes("Tình yêu")}
+                  defaultChecked={selectedCategory0 && selectedCategory0.includes("Ngôn tình")}
                   id="checkbox-item-6" onChange={(e) => {
                     if (e.target.checked) {
-                      setSelectedCategory([...selectedCategory, "Tình yêu"])
+                      setSelectedCategory([...selectedCategory, "Ngôn tình"])
                     } else {
                       const arr = selectedCategory.filter(author => {
-                        return author !== "Tình yêu"
+                        return author !== "Ngôn tình"
                       })
                       setSelectedCategory(arr);
                     }
                   }} type="checkbox" value="" className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 "
                 />
-                <label htmlFor="checkbox-item-6" className="w-full ml-2 text-sm font-medium text-gray-900 rounded cursor-pointer ">Tình yêu</label>
+                <label htmlFor="checkbox-item-6" className="w-full ml-2 text-sm font-medium text-gray-900 rounded cursor-pointer ">Ngôn tình</label>
               </div>
               <div className="flex items-center p-2 rounded hover:bg-gray-200 ">
                 <input
