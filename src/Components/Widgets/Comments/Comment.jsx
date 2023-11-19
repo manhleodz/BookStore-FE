@@ -33,11 +33,13 @@ export default function Comment({ comment, setComments, listCmt, user, detail, s
         commentBody: newComment,
         rating: rating
       }).then(() => {
-        CommentApi.getCommentsByProductId(comment.ProductId).then(res => {
-          setComments(res.data.reverse());
-          setReload(false);
-          setEdit(true);
-        }).catch(err => console.log(err))
+        Detail.updatedDetailProduct(comment.ProductId).then(() => {
+          CommentApi.getCommentsByProductId(comment.ProductId).then(res => {
+            setComments(res.data.reverse());
+            setReload(false);
+            setEdit(true);
+          }).catch(err => console.log(err))
+        })
       })
       setNewComment('');
     }
