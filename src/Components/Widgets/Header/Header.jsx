@@ -67,7 +67,7 @@ export default function Header({ user }) {
                     </div>
                 </div>
                 <div
-                    className="max-w-screen-xl flex flex-wrap items-center justify-between max-lg:justify-start max-lg:flex-nowrap max-md:justify-between max-md:flex-col max-sm:justify-between max-sm:flex-col mx-auto p-3"
+                    className="max-w-screen-xl flex flex-wrap items-center justify-between max-lg:justify-between max-lg:flex-nowrap max-md:justify-between max-md:flex-col max-sm:justify-between max-sm:flex-col mx-auto p-3"
                 >
                     <div
                         className="flex items-center"

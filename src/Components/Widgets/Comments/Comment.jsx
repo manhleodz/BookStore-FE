@@ -25,6 +25,7 @@ export default function Comment({ comment, setComments, listCmt, user, detail, s
   const [rating, setRating] = useState(comment.rating);
   const [hover, setHover] = React.useState(-1);
 
+  console.log(comment);
   const UpdateComment = (e) => {
     e.preventDefault();
     if (newComment !== comment.commentBody) {

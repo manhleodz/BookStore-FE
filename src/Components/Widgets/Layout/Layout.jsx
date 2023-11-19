@@ -42,7 +42,10 @@ export default function Layout({ children }) {
         });
     }
 
-    return () => clearTimeout(timeOut);
+    return () => {
+      if (document.getElementById('background1') !== null)
+        clearTimeout(timeOut)
+    };
   }, [dispatch]);
 
   return (
