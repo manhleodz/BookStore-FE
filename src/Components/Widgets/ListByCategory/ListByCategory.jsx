@@ -28,17 +28,18 @@ export default function ListByCategory({ category }) {
                 <div className=' flex items-center justify-between w-full'>
                     <button
                         onClick={() => {
-                            document.getElementById('container').translate -= 200;
+                            document.getElementById('container1').scrollLeft -= 600;
                         }}
                         className='z-50 p-2 w-10 h-10 flex justify-center items-center active:scale-105 rounded-full bg-gray-300'
                     >
-                        <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 320 512" className=' fill-gray-300'>
+                        <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 320 512" className=' fill-gray-700'>
                             <path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z" />
                         </svg>
                     </button>
                     <div
-                        className='flex w-full items-center justify-start mx-auto overflow-hidden transition transform border-gray-200 shadow-sm p-1 border relative z-10' id='container'
-                        style={{ width: `1300px`, transitionDuration: '5000ms' }}
+                        className='flex w-full items-center justify-start mx-auto overflow-hidden transition transform border-gray-200 shadow-sm p-1 border relative z-10' 
+                        id='container1'
+                        style={{ width: `1300px` }}
                     >
                         <div
                             className='w-full flex whitespace-nowrap relative -z-10 transform transition duration-1000'
@@ -56,11 +57,11 @@ export default function ListByCategory({ category }) {
                     </div>
                     <button
                         onClick={() => {
-                            document.getElementById('container').translate += 200;
+                            document.getElementById('container1').scrollLeft += 600;
                         }}
                         className='z-50 p-2 w-10 h-10 flex justify-center items-center active:scale-105 rounded-full bg-gray-300'
                     >
-                        <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 320 512" className=' fill-gray-300'>
+                        <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 320 512" className=' fill-gray-700'>
                             <path d="M310.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-192 192c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L242.7 256 73.4 86.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l192 192z" />
                         </svg>
                     </button>

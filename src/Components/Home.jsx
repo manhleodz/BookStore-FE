@@ -66,8 +66,8 @@ export default function Home() {
           <ListBook
             flashSale={shuffleArray(flashSale)}
           />
-          {/* <ListByCategory category={'Tiểu thuyết'}/>
-          <ListByCategory category={'Gia đình'}/> */}
+          <ListByCategory category={'Ngôn tình'}/>
+          <ListByCategory category={'Phật giáo'}/>
         </div>
         <Footer />
       </div>

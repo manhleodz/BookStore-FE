@@ -103,7 +103,7 @@ export default function Info() {
 
   const timer = setTimeout(() => {
     setOTP(Generate(6));
-  }, 128000);
+  }, 128000); 
 
   if (!user) return null;
 
