@@ -103,7 +103,7 @@ export default function Cart() {
                                                                 let ids = [];
                                                                 for (let i = 0; i < selected.length; i++) {
                                                                     ids.push(selected[i].id)
-                                                                    const index = cart.findIndex((c) => c.cart.id === selected[i].id);
+                                                                    const index = cart.findIndex((c) => c.id === selected[i].id);
                                                                     dispatch(deleteCart(index));
                                                                 }
 
