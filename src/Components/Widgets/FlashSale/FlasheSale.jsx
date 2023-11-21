@@ -40,7 +40,7 @@ export default function FlasheSale() {
                 <div className=' flex items-center justify-between w-full'>
                     <button
                         onClick={() => {
-                            document.getElementById('container').scrollLeft -= 600;
+                            document.getElementById('container5').scrollLeft -= 600;
                         }}
                         className='z-50 p-2 w-10 h-10 flex justify-center items-center active:scale-105 rounded-full bg-gray-300'
                     >
@@ -48,7 +48,7 @@ export default function FlasheSale() {
                             <path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z" />
                         </svg>
                     </button>
-                    <div className='flex w-full items-center justify-start mx-auto overflow-hidden border-gray-200 shadow-sm p-1 border relative z-10' id='container' style={{ width: `1300px` }}>
+                    <div className='flex w-full items-center justify-start mx-auto overflow-hidden border-gray-200 shadow-sm p-1 border relative z-10' id='container5' style={{ width: `1300px` }}>
                         <div
                             className='w-full flex whitespace-nowrap relative -z-10'
                             style={{ width: `${flashSale.length * 200}px` }}
@@ -65,7 +65,7 @@ export default function FlasheSale() {
                     </div>
                     <button
                         onClick={() => {
-                            document.getElementById('container').scrollLeft += 600;
+                            document.getElementById('container5').scrollLeft += 600;
                         }}
                         className='z-50 p-2 w-10 h-10 flex justify-center items-center active:scale-105 rounded-full bg-gray-300'
                     >
